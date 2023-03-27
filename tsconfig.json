@@ -1,0 +1,28 @@
+{
+	"ts-node": {
+		"require": ["tsconfig-paths/register"]
+	},
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"baseUrl": ".",
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react"
+	},
+	"include": ["src/**/*", "store", "packages", "custom.d.ts", "emotion.d.ts"],
+	"paths": {
+		"src/*": ["src/*"],
+		"packages/*": ["packages/*"]
+	}
+}
