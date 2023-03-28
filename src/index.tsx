@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import { store } from "store";
 import { Provider } from "react-redux";
 import { GlobalStyles, theme } from "./Globals/global";
+import Player from "packages/rrweb";
 const rootElement = document.getElementById("root");
 if (rootElement) {
 	const root = ReactDOM.createRoot(rootElement);
@@ -12,7 +13,10 @@ if (rootElement) {
 			<Provider store={store}>
 				<Global styles={GlobalStyles} />
 				<ThemeProvider theme={theme}>
-					<div>test</div>
+					<>
+						{Player}
+						<div>test</div>
+					</>
 				</ThemeProvider>
 			</Provider>
 		</StrictMode>,
