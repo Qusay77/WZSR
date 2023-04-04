@@ -1,19 +1,12 @@
-import Player, { usePlayer } from "packages/rrweb";
+import Player from "packages/rrweb";
+import SessionEvents from "../SessionEvents";
 import { PlayerContainer } from "./Blocks";
 
 const PlayerBlock = () => {
-	const { togglePlay, play, timer } = usePlayer();
 	return (
 		<PlayerContainer>
 			<Player />
-			<div>test</div>
-			<div
-				onClick={() => {
-					togglePlay();
-				}}
-			>
-				lool {`${play} ${timer}`}
-			</div>
+			<SessionEvents />
 		</PlayerContainer>
 	);
 };

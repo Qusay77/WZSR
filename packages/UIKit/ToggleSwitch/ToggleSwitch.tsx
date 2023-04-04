@@ -1,8 +1,20 @@
+import styled from "@emotion/styled";
 import { useState } from "react";
 import Switch from "react-switch";
 import { theme } from "src/Globals/global";
 import { SwitchTypes } from "./types";
 const { ButtonDisabled, BluePrimary } = theme.colors;
+
+const StyledSwitch = styled(Switch)`
+	&:hover {
+		div:nth-child(1) {
+			background: var(--Blue-Hover) !important;
+		}
+		div:nth-child(2) {
+			border: 2px solid var(--Blue-Primary) !important;
+		}
+	}
+`;
 
 const WZConfig = {
 	offColor: ButtonDisabled,
@@ -23,7 +35,7 @@ const ToggleSwitch = ({ onChange, checked, externalConfig }: SwitchTypes) => {
 
 	const config = externalConfig ?? WZConfig;
 	return (
-		<Switch
+		<StyledSwitch
 			onChange={onChange ?? handleChange}
 			checked={checked ?? defaultState}
 			{...config}
