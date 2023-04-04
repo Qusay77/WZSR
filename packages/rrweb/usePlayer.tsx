@@ -10,6 +10,7 @@ const usePlayer = () => {
 	const togglePlay = () => {
 		PlayerInstance?.toggle();
 	};
+
 	return { PlayerInstance, play, togglePlay, timer };
 };
 

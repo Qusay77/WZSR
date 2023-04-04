@@ -1,30 +1,17 @@
 import { css } from "@emotion/react";
 import emotionNormalize from "emotion-normalize";
-type calculateClampFontSizeType = (
-	minFont: number,
-	maxFont: number,
+type calculateClampType = (
+	min: number,
+	max: number,
 	minScreen: number,
 	maxScreen: number,
 ) => string;
 
-const calculateClampFontSize: calculateClampFontSizeType = (
-	minFont,
-	maxFont,
-	minScreen,
-	maxScreen,
-) => {
-	const vw = (100 * (maxFont - minFont)) / (maxScreen - minScreen);
-	const r =
-		(minScreen * maxFont - maxScreen * minFont) / (minScreen - maxScreen) / 16;
-	return `font-size: clamp(${minFont / 16}rem,${vw}vw + ${r}rem,${
-		maxFont / 16
-	}rem);`;
+const clamp: calculateClampType = (min, max, minScreen, maxScreen) => {
+	const vw = (100 * (max - min)) / (maxScreen - minScreen);
+	const r = (minScreen * max - maxScreen * min) / (minScreen - maxScreen) / 16;
+	return `clamp(${min / 16}rem,${vw}vw + ${r}rem,${max / 16}rem);`;
 };
-
-type fontClampType = (min: number, max: number) => string;
-
-const fontClamp: fontClampType = (min, max) =>
-	calculateClampFontSize(min, max, 260, 1920);
 
 const TextHeader = "#000000";
 const TextBody = "#333333";
@@ -75,7 +62,7 @@ const theme = {
 		ButtonDisabled,
 	},
 	helpers: {
-		fontClamp,
+		clamp,
 	},
 };
 
@@ -106,15 +93,24 @@ const GlobalStyles = css`
 		--Button-Pressed: ${ButtonPressed};
 		--Button-Disabled: ${ButtonDisabled};
 	}
-	body {
+	body,
+	html {
 		font-family: Inter;
 		margin: 0;
+		padding: 0;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
 	}
 
 	p {
 		margin: 0;
 	}
+
+	* {
+		box-sizing: border-box;
+	}
 `;
 
-export { GlobalStyles, theme, fontClamp };
-export type { fontClampType };
+export { GlobalStyles, theme, clamp };
+export type { calculateClampType };

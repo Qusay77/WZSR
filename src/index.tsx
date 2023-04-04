@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { store } from "store";
 import { Provider } from "react-redux";
 import { GlobalStyles, theme } from "./Globals/global";
-import SRWindow from "./SRWindow";
+import SRWindow from "packages/Screens/SRWindow";
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
