@@ -10,26 +10,54 @@ import { ReactComponent as SkipBack } from "./svg/skipback.svg";
 import { ReactComponent as SkipForward } from "./svg/skipforward.svg";
 import { ReactComponent as PlayIcon } from "./svg/play.svg";
 import { ReactComponent as PauseIcon } from "./svg/pause.svg";
+import { usePlayer } from "packages/rrweb";
 const PlayerProgress = () => {
-	return <ProgressStamp>00:12 / 02:47</ProgressStamp>;
-};
-const Skip = ({ dir }: { dir: string }) => {
+	const { metaData, timer } = usePlayer();
+	const { totalTime } = metaData;
+	const DateTotalTime = new Date(totalTime);
+	const totalTimeString = DateTotalTime.toLocaleTimeString("en-US", {
+		second: "2-digit",
+		minute: "2-digit",
+	});
+	const DateTimer = new Date(timer * 1000);
+	const DateTimerString = DateTimer.toLocaleTimeString("en-US", {
+		second: "2-digit",
+		minute: "2-digit",
+	});
 	return (
-		<SkipButton>
+		<ProgressStamp>
+			{DateTimerString} / {totalTimeString}
+		</ProgressStamp>
+	);
+};
+const Skip = ({ dir, onClick }: { dir: string; onClick: () => void }) => {
+	return (
+		<SkipButton onClick={onClick}>
 			{dir === "back" && <SkipBack />}
 			{dir === "forward" && <SkipForward />}
 		</SkipButton>
 	);
 };
-const Play = ({ isPlaying }: { isPlaying: boolean }) => {
-	return <PlayButton>{isPlaying ? <PauseIcon /> : <PlayIcon />}</PlayButton>;
+const Play = ({
+	isPlaying,
+	onClick,
+}: {
+	isPlaying: boolean;
+	onClick: () => void;
+}) => {
+	return (
+		<PlayButton onClick={onClick}>
+			{isPlaying ? <PauseIcon /> : <PlayIcon />}
+		</PlayButton>
+	);
 };
 const PlayActions = () => {
+	const { togglePlay, play, SkipTime } = usePlayer();
 	return (
 		<PlayActionsContainer>
-			<Skip dir="back" />
-			<Play isPlaying={true} />
-			<Skip dir="forward" />
+			<Skip dir="back" onClick={() => SkipTime(false)} />
+			<Play onClick={togglePlay} isPlaying={play} />
+			<Skip dir="forward" onClick={() => SkipTime(true)} />
 		</PlayActionsContainer>
 	);
 };

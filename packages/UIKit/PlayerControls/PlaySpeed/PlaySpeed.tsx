@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { usePlayer } from "packages/rrweb";
 import { SpeedBlock, SpeedButton } from "./Blocks";
 const WZConfig = [1, 2, 4];
 const PlayerSpeed = () => {
-	const [active, setActive] = useState(WZConfig[0]);
+	const { setReplaySpeed, speed } = usePlayer();
+
 	return (
 		<SpeedBlock>
 			{WZConfig.map((e) => (
 				<SpeedButton
 					key={`speed-button-${e}`}
-					active={active === e}
+					active={speed === e}
 					onClick={() => {
-						setActive(e);
+						setReplaySpeed(e);
 					}}
 				>
 					X{e}

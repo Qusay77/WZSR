@@ -2,7 +2,12 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import rrwebPlayer from "rrweb-player";
 import "rrweb-player/dist/style.css";
-import { PlayerStateTypes, setPlayer } from "store/PlayerStore";
+import {
+	PlayerStateTypes,
+	resetPlayer,
+	setMetaData,
+	setPlayer,
+} from "store/PlayerStore";
 import { PlayerMount } from "./Blocks";
 import events from "./events.json";
 import usePlayerDimensions from "./usePlayerDimensions";
@@ -28,12 +33,15 @@ const Player = () => {
 					showController: false,
 					autoPlay: false,
 					useVirtualDom: true,
+					speedOption: [1, 2, 4],
 				},
 			});
-
+			const meta = newPlayer.getMetaData();
+			dispatch(setMetaData(meta));
 			dispatch(setPlayer(newPlayer));
 		}
 		return () => {
+			dispatch(resetPlayer());
 			dispatch(setPlayer(null));
 		};
 	}, [PlayerRef]);

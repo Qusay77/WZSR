@@ -6,15 +6,27 @@ import {
 import { TimeLineActions } from "./TimeLineActions";
 import PlayerSpeed from "./PlaySpeed";
 import ToggleSwitch from "../ToggleSwitch";
-const PlayerControls = () => {
+import { usePlayer } from "packages/rrweb";
+const PlayerControls = ({
+	enterFullScreen,
+}: {
+	enterFullScreen: () => void;
+}) => {
+	const { toggleSkip, skip } = usePlayer();
 	return (
 		<PlayerControlsContainer>
 			<TimeLineActions />
 			<SpeedAndToggleBlock>
+				<p
+					onClick={enterFullScreen}
+					style={{ cursor: "pointer", fontWeight: 600 }}
+				>
+					FullScreen
+				</p>
 				<PlayerSpeed />
 				<TextSeparator />
 				<p>Skip Idle Time</p>
-				<ToggleSwitch />
+				<ToggleSwitch checked={skip} onChange={toggleSkip} />
 			</SpeedAndToggleBlock>
 		</PlayerControlsContainer>
 	);

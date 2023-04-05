@@ -2,12 +2,12 @@ import Player from "packages/rrweb";
 import PlayerControls from "../PlayerControls";
 import { PlayerContainer, PlayerControlsContainer } from "./Blocks";
 
-const PlayerBlock = () => {
+const PlayerBlock = ({ enterFullScreen }: { enterFullScreen: () => void }) => {
 	return (
 		<PlayerContainer>
 			<Player />
 			<PlayerControlsContainer>
-				<PlayerControls />
+				<PlayerControls enterFullScreen={enterFullScreen} />
 			</PlayerControlsContainer>
 		</PlayerContainer>
 	);

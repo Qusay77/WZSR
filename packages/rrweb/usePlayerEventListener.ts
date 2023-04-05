@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import rrwebPlayer from "rrweb-player";
-import { setPlay, setTimer } from "store/PlayerStore";
+import { PlayerStateTypes, setPlay, setTimer } from "store/PlayerStore";
 type CallBackValueType = { payload: number | unknown } | undefined;
 type CallBackType = (arg: CallBackValueType) => void;
 type CallBackArrayType = Array<CallBackType> | null;
@@ -10,13 +10,23 @@ type EventType = {
 	callBack: CallBackType;
 };
 const usePlayerEventListener = (element: rrwebPlayer | null) => {
-	const meta = element?.getMetaData() || { totalTime: 0 };
+	const { metaData } = useSelector(
+		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
+	);
+	const { totalTime } = metaData;
 	const dispatch = useDispatch();
 	const handlePlayToggle = (isStart: boolean) => {
 		dispatch(setPlay(isStart));
 	};
 	const handleTimer = (scale: number) => {
-		const timeInMS = Math.floor((meta.totalTime * scale) / 1000);
+		const timeInMS = Math.floor((totalTime * scale) / 1000);
+		const ms = totalTime * scale;
+		// 20 ms less because it never reaches full
+		const gt = ms >= totalTime - 100;
+		const lt = ms <= 0;
+		if (gt || lt) {
+			element?.toggle();
+		}
 		dispatch(setTimer(timeInMS));
 	};
 	const savedFunctions = useRef<CallBackArrayType>(null);
@@ -36,7 +46,7 @@ const usePlayerEventListener = (element: rrwebPlayer | null) => {
 	];
 	useEffect(() => {
 		savedFunctions.current = events.map(({ callBack }) => callBack);
-	}, [meta]);
+	}, [metaData]);
 	useEffect(() => {
 		if (!element) return;
 		events.forEach(({ eventName }, i) => {
