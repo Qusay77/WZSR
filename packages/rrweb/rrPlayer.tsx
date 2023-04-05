@@ -33,6 +33,9 @@ const Player = () => {
 
 			dispatch(setPlayer(newPlayer));
 		}
+		return () => {
+			dispatch(setPlayer(null));
+		};
 	}, [PlayerRef]);
 	usePlayerDimensions(PlayerRef?.current);
 

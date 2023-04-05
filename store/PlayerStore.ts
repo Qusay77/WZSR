@@ -17,7 +17,7 @@ const PlayerSlice = createSlice({
 	name: "PlayerState",
 	initialState,
 	reducers: {
-		setPlayer(state, action: PayloadAction<rrwebPlayer>) {
+		setPlayer(state, action: PayloadAction<rrwebPlayer | null>) {
 			state.PlayerInstance = action.payload;
 		},
 		setSkipToggle(state, action: PayloadAction<boolean>) {

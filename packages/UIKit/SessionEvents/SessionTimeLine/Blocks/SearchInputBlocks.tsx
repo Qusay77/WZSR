@@ -20,7 +20,22 @@ const SearchInput = styled.input`
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 17px;
-	color: var(--Text-Sub);
+	color: var(--Text-Body);
+	::placeholder {
+		/* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: var(--Text-Sub);
+		opacity: 1; /* Firefox */
+	}
+
+	:-ms-input-placeholder {
+		/* Internet Explorer 10-11 */
+		color: var(--Text-Sub);
+	}
+
+	::-ms-input-placeholder {
+		/* Microsoft Edge */
+		color: var(--Text-Sub);
+	}
 `;
 const SearchInputContainer = styled.div`
 	position: relative;

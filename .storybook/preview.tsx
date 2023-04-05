@@ -4,7 +4,6 @@ import { Global, ThemeProvider } from "@emotion/react";
 import { store } from "../store";
 import { Provider } from "react-redux";
 import { GlobalStyles, theme } from "../src/Globals/global";
-
 // ..other decorators here
 
 export const withGlobals: Decorator = (StoryFn) => {
@@ -21,6 +20,11 @@ export const withGlobals: Decorator = (StoryFn) => {
 export const decorators = [withGlobals];
 const preview: Preview = {
 	parameters: {
+		options: {
+			storySort: {
+				order: ["SRWindow", "*", "Example"],
+			},
+		},
 		actions: { argTypesRegex: "^on[A-Z].*" },
 		controls: {
 			matchers: {

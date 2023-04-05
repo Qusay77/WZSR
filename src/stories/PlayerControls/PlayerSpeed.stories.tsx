@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PlayerSpeed from "packages/UIKit/PlaySpeed";
+import { PlayerSpeed } from "packages/UIKit/PlayerControls";
 
 const meta = {
 	title: "PlayerControls/PlayerSpeed",

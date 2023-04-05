@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PlayerBlock from "packages/UIKit/Player";
+import PlayerControls from "packages/UIKit/PlayerControls";
 
 const meta = {
-	title: "Player/Basic",
-	component: PlayerBlock,
+	title: "PlayerControls/PlayerControls",
+	component: PlayerControls,
 	parameters: {
-		layout: "flex",
+		layout: "fullscreen",
 		controls: {
 			exclude: /.*/g,
 		},
 	},
-} satisfies Meta<typeof PlayerBlock>;
+} satisfies Meta<typeof PlayerControls>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

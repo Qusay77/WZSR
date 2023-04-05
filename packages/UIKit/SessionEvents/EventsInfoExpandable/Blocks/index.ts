@@ -19,6 +19,7 @@ const ShowMore = styled.div`
 	font-feature-settings: "salt" on;
 	color: var(--Blue-Primary);
 	cursor: pointer;
+	text-align: start;
 `;
 
 const InfoBlocksContainer = styled.div`

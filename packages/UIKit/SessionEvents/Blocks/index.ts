@@ -9,6 +9,9 @@ const SessionEventsContainer = styled.div`
 	background: var(--White);
 	border-left: 1px solid var(--Seperation);
 	width: 555px;
+	flex-basis: 555px;
+	flex-grow: 0;
+	flex-shrink: 0;
 	overflow-y: auto;
 	height: 100%;
 `;

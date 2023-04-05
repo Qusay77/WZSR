@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PlayerBlock from "packages/UIKit/Player";
+import SRWindow from "packages/Screens/SRWindow";
 
 const meta = {
-	title: "Player/Basic",
-	component: PlayerBlock,
+	title: "SRWindow/Basic",
+	component: SRWindow,
 	parameters: {
 		layout: "flex",
 		controls: {
 			exclude: /.*/g,
 		},
 	},
-} satisfies Meta<typeof PlayerBlock>;
+} satisfies Meta<typeof SRWindow>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

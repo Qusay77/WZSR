@@ -41,5 +41,4 @@ const TimeLineActions = () => {
 		</PlayerActionsContainer>
 	);
 };
-export { PlayerProgress, PlayActions };
-export default TimeLineActions;
+export { PlayerProgress, PlayActions, TimeLineActions };

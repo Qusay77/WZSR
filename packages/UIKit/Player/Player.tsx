@@ -1,12 +1,14 @@
 import Player from "packages/rrweb";
-import SessionEvents from "../SessionEvents";
-import { PlayerContainer } from "./Blocks";
+import PlayerControls from "../PlayerControls";
+import { PlayerContainer, PlayerControlsContainer } from "./Blocks";
 
 const PlayerBlock = () => {
 	return (
 		<PlayerContainer>
 			<Player />
-			<SessionEvents />
+			<PlayerControlsContainer>
+				<PlayerControls />
+			</PlayerControlsContainer>
 		</PlayerContainer>
 	);
 };

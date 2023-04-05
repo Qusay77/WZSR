@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import TimeLineActions, {
+import {
 	PlayActions,
 	PlayerProgress,
-} from "packages/UIKit/TimeLineActions/TimeLineActions";
+	TimeLineActions,
+} from "packages/UIKit/PlayerControls";
 
 const meta = {
 	title: "PlayerControls/TimeLineActions",

@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { PlayerStateTypes } from "store/PlayerStore";
+
+// scaling issues for later
 
 const usePlayerDimensions = (PlayerRef: HTMLDivElement | null) => {
 	const { PlayerInstance } = useSelector(
@@ -22,14 +25,19 @@ const usePlayerDimensions = (PlayerRef: HTMLDivElement | null) => {
 			) as HTMLCollectionOf<HTMLElement>,
 		)[0];
 		const rect = rr_player?.getBoundingClientRect();
-
-		PlayerInstance.addEventListener("resize", (replayDimensions) =>
-			updatePlayerDimensions(replayDimensions, rect, rr_player, player__frame),
-		);
-		const windowResizeCallBack = () =>
-			windowResize(rect, rr_player, player__frame);
-		window.addEventListener("resize", windowResizeCallBack);
-		return () => window.removeEventListener("resize", windowResizeCallBack);
+		if (rr_player) {
+			rr_player.style.width = "100%";
+			rr_player.style.height = "100%";
+			player__frame.style.width = "100%";
+			player__frame.style.height = "100%";
+		}
+		// PlayerInstance.addEventListener("resize", (replayDimensions) =>
+		// 	updatePlayerDimensions(replayDimensions, rect, rr_player, player__frame),
+		// );
+		// const windowResizeCallBack = () =>
+		// 	windowResize(rect, rr_player, player__frame);
+		// window.addEventListener("resize", windowResizeCallBack);
+		// return () => window.removeEventListener("resize", windowResizeCallBack);
 	}, [PlayerInstance]);
 
 	const windowResize = (
