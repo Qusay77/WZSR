@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import rrwebPlayer from "rrweb-player";
 import { PlayerStateTypes, setPlay, setTimer } from "store/PlayerStore";
@@ -10,7 +10,7 @@ type EventType = {
 	callBack: CallBackType;
 };
 const usePlayerEventListener = (element: rrwebPlayer | null) => {
-	const { metaData } = useSelector(
+	const { metaData, play } = useSelector(
 		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
 	);
 	const { totalTime } = metaData;
@@ -18,16 +18,33 @@ const usePlayerEventListener = (element: rrwebPlayer | null) => {
 	const handlePlayToggle = (isStart: boolean) => {
 		dispatch(setPlay(isStart));
 	};
+
+	const [scaleState, setScale] = useState(0);
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+			if (play) {
+				element?.goto(totalTime, play);
+			}
+		}, 2000);
+		return () => clearTimeout(timeoutId);
+	}, [scaleState]);
+
 	const handleTimer = (scale: number) => {
 		const timeInMS = Math.floor((totalTime * scale) / 1000);
 		const ms = totalTime * scale;
-		// 20 ms less because it never reaches full
-		const gt = ms >= totalTime - 100;
+		setScale(scale);
+		const gt = ms >= totalTime;
 		const lt = ms <= 0;
+
 		if (gt || lt) {
 			element?.toggle();
 		}
-		dispatch(setTimer(timeInMS));
+		if (gt) {
+			dispatch(setTimer(0));
+			element?.goto(0, play);
+		} else {
+			dispatch(setTimer(timeInMS));
+		}
 	};
 	const savedFunctions = useRef<CallBackArrayType>(null);
 	const events: Array<EventType> = [

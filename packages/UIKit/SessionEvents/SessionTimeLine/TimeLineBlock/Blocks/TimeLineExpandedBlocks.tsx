@@ -28,10 +28,10 @@ const EssentialInfoBlock = styled.div`
 		font-size: 14px;
 		line-height: 17px;
 	}
-	p:nth-child(1) {
+	p:nth-of-type(1) {
 		color: var(--Text-Sub);
 	}
-	p:nth-child(2) {
+	p:nth-of-type(2) {
 		color: var(--Text-Body);
 	}
 	flex: 1;
@@ -91,10 +91,10 @@ const MiniListItem = styled.div`
 		line-height: 17px;
 		color: var(--Text-Body);
 	}
-	p:nth-child(1) {
+	p:nth-of-type(1) {
 		font-weight: 600;
 	}
-	p:nth-child(2) {
+	p:nth-of-type(2) {
 		font-weight: 400;
 	}
 `;

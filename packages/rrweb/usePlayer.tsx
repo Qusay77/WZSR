@@ -2,13 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { PlayerStateTypes, setSkipToggle, setSpeed } from "store/PlayerStore";
 import usePlayerEventListener from "./usePlayerEventListener";
 
-const usePlayer = () => {
+const usePlayer = (init?: boolean) => {
 	const { PlayerInstance, play, timer, metaData, skip, speed } = useSelector(
 		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
 	);
 	const { totalTime } = metaData;
 	const dispatch = useDispatch();
-	usePlayerEventListener(PlayerInstance);
+	if (init) {
+		usePlayerEventListener(PlayerInstance);
+	}
 	const togglePlay = () => {
 		PlayerInstance?.toggle();
 	};

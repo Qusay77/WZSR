@@ -12,7 +12,7 @@ const PlayerControls = ({
 }: {
 	enterFullScreen: () => void;
 }) => {
-	const { toggleSkip, skip } = usePlayer();
+	const { toggleSkip, skip } = usePlayer(true);
 	return (
 		<PlayerControlsContainer>
 			<TimeLineActions />

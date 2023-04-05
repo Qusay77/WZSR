@@ -7,10 +7,10 @@ const { ButtonDisabled, BluePrimary } = theme.colors;
 
 const StyledSwitch = styled(Switch)`
 	&:hover {
-		div:nth-child(1) {
+		div:nth-of-type(1) {
 			background: var(--Blue-Hover) !important;
 		}
-		div:nth-child(2) {
+		div:nth-of-type(2) {
 			border: 2px solid var(--Blue-Primary) !important;
 		}
 	}
