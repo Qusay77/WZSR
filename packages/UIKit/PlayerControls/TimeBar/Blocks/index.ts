@@ -30,6 +30,7 @@ const reset = css`
 	background: transparent;
 `;
 const TimeRangeInput = styled.input<{ backgroundSize: string }>`
+	user-select: none;
 	z-index: 9;
 	width: 100%;
 	height: 8px;

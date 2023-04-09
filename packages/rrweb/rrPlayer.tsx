@@ -33,7 +33,6 @@ const Player = () => {
 					showController: false,
 					autoPlay: false,
 					useVirtualDom: true,
-					speedOption: [1, 2, 4],
 				},
 			});
 			const meta = newPlayer.getMetaData();
