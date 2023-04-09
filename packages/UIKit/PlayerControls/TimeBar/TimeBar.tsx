@@ -7,6 +7,7 @@ const TimeBar = () => {
 
 	const [isMouseDown, setIsMouseDown] = useState(false);
 	const [cloneState, setCloneState] = useState(timer);
+
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = parseInt(e.target.value, 10);
 		if (!isMouseDown) {
@@ -15,9 +16,11 @@ const TimeBar = () => {
 			setCloneState(value);
 		}
 	};
+
 	const handleMouseDown = useCallback(() => {
 		setIsMouseDown(true);
 		setCloneState(timer);
+
 		document.addEventListener(
 			"mouseup",
 			() => {
@@ -27,21 +30,20 @@ const TimeBar = () => {
 			{ once: true },
 		);
 	}, []);
-
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
 			if (play && isMouseDown) {
 				setIsMouseDown(false);
+				PlayerInstance?.goto(cloneState, play);
 			}
-		}, 4000);
+		}, 500);
 		return () => clearTimeout(timeoutId);
-	}, [isMouseDown]);
+	}, [cloneState]);
 
 	const min = 0;
 	const max = totalTime || 1;
 	const val = isMouseDown ? cloneState : timer;
 	const backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
-
 	return (
 		<TimeRangeInput
 			type="range"

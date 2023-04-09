@@ -45,6 +45,7 @@ const TimeRangeInput = styled.input<{ backgroundSize: string }>`
 	cursor: pointer;
 	background-repeat: no-repeat;
 	background-size: ${({ backgroundSize }) => backgroundSize};
+
 	::-moz-range-thumb {
 		${thumb}
 	}
