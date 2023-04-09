@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const PlayerControlsContainer = styled.div`
+const PlayerControlsInnerContainer = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
@@ -37,4 +37,14 @@ const TextSeparator = styled.div`
 	border: 1px solid var(--Seperation);
 `;
 
-export { PlayerControlsContainer, SpeedAndToggleBlock, TextSeparator };
+const PlayerControlsContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
+export {
+	PlayerControlsContainer,
+	PlayerControlsInnerContainer,
+	SpeedAndToggleBlock,
+	TextSeparator,
+};

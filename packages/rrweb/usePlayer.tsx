@@ -23,7 +23,7 @@ const usePlayer = (init?: boolean) => {
 		PlayerInstance?.setSpeed(number);
 	};
 	const SkipTime = (forward: boolean) => {
-		const ms = forward ? timer * 1000 + 10000 : timer * 1000 - 10000;
+		const ms = forward ? timer + 10000 : timer - 10000;
 		const gt = ms > totalTime ? totalTime : ms;
 		const res = ms < 0 ? 0 : gt;
 		PlayerInstance?.goto(res, play);
@@ -40,6 +40,7 @@ const usePlayer = (init?: boolean) => {
 		setReplaySpeed,
 		speed,
 		metaData,
+		totalTime,
 	};
 };
 

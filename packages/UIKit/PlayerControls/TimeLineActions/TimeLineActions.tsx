@@ -19,7 +19,7 @@ const PlayerProgress = () => {
 		second: "2-digit",
 		minute: "2-digit",
 	});
-	const DateTimer = new Date(timer * 1000);
+	const DateTimer = new Date(timer);
 	const DateTimerString = DateTimer.toLocaleTimeString("en-US", {
 		second: "2-digit",
 		minute: "2-digit",

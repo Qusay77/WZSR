@@ -41,8 +41,8 @@ const PlayerSlice = createSlice({
 		setPlay(state, action: PayloadAction<boolean>) {
 			state.play = action.payload;
 		},
-		setTimer(state, action: PayloadAction<number>) {
-			state.timer = action.payload;
+		setTimerScale(state, action: PayloadAction<number>) {
+			state.timer = Math.floor(action.payload * state.metaData.totalTime);
 		},
 		setMetaData(
 			state,
@@ -62,7 +62,7 @@ export const {
 	setPlayer,
 	setSkipToggle,
 	setPlay,
-	setTimer,
+	setTimerScale,
 	resetPlayer,
 	setMetaData,
 	setSpeed,
