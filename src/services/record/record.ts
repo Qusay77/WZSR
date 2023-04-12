@@ -62,7 +62,7 @@ const api = createApi({
 	baseQuery: customBaseQuery,
 	endpoints: (builder) => ({
 		fetchReplayFile: builder.query({
-			query: (id) => `https://sessions.webeyez.dev/public/${id}.wz`,
+			query: (id) => `${import.meta.env.VITE_APP_API_KEY}public/${id}.wz`,
 		}),
 	}),
 });

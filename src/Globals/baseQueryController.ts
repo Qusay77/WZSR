@@ -17,7 +17,7 @@ const baseQueryController: BaseQueryFn<
 	const result = await fetchBaseQuery({
 		...extraOptions,
 		headers: customHeaders,
-		baseUrl: "/",
+		baseUrl: import.meta.env.VITE_APP_API_KEY,
 	})(args, api, extraOptions);
 
 	if (result.error) {
