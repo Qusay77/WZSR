@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { PlayerStateTypes, setSkipToggle, setSpeed } from "store/PlayerStore";
+import {
+	PlayerStateTypes,
+	setSkipToggle,
+	setSpeed,
+} from "store/state/PlayerStore";
 import usePlayerEventListener from "./usePlayerEventListener";
 
 const usePlayer = (init?: boolean) => {

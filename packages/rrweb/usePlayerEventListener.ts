@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import rrwebPlayer from "rrweb-player";
-import { PlayerStateTypes, setPlay, setTimerScale } from "store/PlayerStore";
+import {
+	PlayerStateTypes,
+	setPlay,
+	setTimerScale,
+} from "store/state/PlayerStore";
 type CallBackValueType = { payload: number | unknown } | undefined;
 type CallBackType = (arg: CallBackValueType) => void;
 type CallBackArrayType = Array<CallBackType> | null;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { PlayerStateTypes } from "store/PlayerStore";
+import { PlayerStateTypes } from "store/state/PlayerStore";
 
 // scaling issues for later
 
