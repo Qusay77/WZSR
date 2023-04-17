@@ -8,7 +8,7 @@ const EventsInfoExpandable = () => {
 		<InfoExpandableContainer>
 			<InfoBlocks showMore={showMore} />
 			<ShowMore onClick={() => setShowMore((prev) => !prev)}>
-				Show More
+				{showMore ? "Show More" : "Show Less"}
 			</ShowMore>
 		</InfoExpandableContainer>
 	);

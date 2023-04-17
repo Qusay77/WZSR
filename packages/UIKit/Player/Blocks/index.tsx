@@ -5,10 +5,11 @@ const PlayerContainer = styled.div`
 	height: 100%;
 	display: flex;
 	position: relative;
+	flex-direction: column;
+	flex: 1;
 `;
 const PlayerControlsContainer = styled.div`
-	position: absolute;
-	bottom: 0;
+	position: relative;
 	width: 100%;
 `;
 export { PlayerContainer, PlayerControlsContainer };

@@ -7,13 +7,18 @@ const TimeLineBlockInlineContainer = styled.div<{ expanded: boolean }>`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	padding: 16px;
-	gap: 16px;
+	padding: ${({ theme }) => theme.helpers.clamp(10, 16, 1000, 1920)};
+	gap: ${({ theme }) => theme.helpers.clamp(10, 16, 1000, 1920)};
 	width: 100%;
-	height: 64px;
+	height: ${({ theme }) => theme.helpers.clamp(40, 64, 1000, 1920)};
 	background-color: var(--White);
 	border: 1px solid var(--Seperation);
 	border-radius: ${({ expanded }) => (expanded ? "8px 8px 0px 0px" : "8px")};
+	@media only screen and (max-width: 1000px) {
+		padding: ${({ theme }) => theme.helpers.clamp(10, 16, 260, 1000)};
+		gap: ${({ theme }) => theme.helpers.clamp(10, 16, 260, 1000)};
+		height: ${({ theme }) => theme.helpers.clamp(40, 64, 260, 1000)};
+	}
 `;
 
 const TypeBlock = styled.div`
@@ -21,18 +26,31 @@ const TypeBlock = styled.div`
 	flex-direction: row;
 	align-items: center;
 	padding: 0px;
-	gap: 16px;
+	gap: ${({ theme }) => theme.helpers.clamp(10, 16, 1000, 1920)};
 	width: fit-content;
 	height: 32px;
+	> svg {
+		width: ${({ theme }) => theme.helpers.clamp(24, 32, 1000, 1920)};
+	}
 	> p {
 		font-style: normal;
 		font-weight: 400;
-		font-size: 16px;
+		font-size: ${({ theme }) => theme.helpers.clamp(12, 16, 1000, 1920)};
 		line-height: 19px;
+		white-space: nowrap;
 		text-align: justify;
 		text-transform: capitalize;
 		font-feature-settings: "salt" on;
 		color: var(--Text-Header);
+	}
+	@media only screen and (max-width: 1000px) {
+		gap: ${({ theme }) => theme.helpers.clamp(10, 16, 260, 1000)};
+		> svg {
+			width: ${({ theme }) => theme.helpers.clamp(24, 32, 260, 1000)};
+		}
+		> p {
+			font-size: ${({ theme }) => theme.helpers.clamp(12, 16, 260, 1000)};
+		}
 	}
 `;
 
@@ -41,14 +59,26 @@ const InfoBlock = styled.div`
 	flex-direction: row;
 	align-items: center;
 	padding: 0px;
-	gap: 16px;
+	gap: ${({ theme }) => theme.helpers.clamp(8, 16, 1000, 1920)};
 	width: fit-content;
 	height: 24px;
+	> svg {
+		width: ${({ theme }) => theme.helpers.clamp(18, 24, 1000, 1920)};
+	}
+	@media only screen and (max-width: 1000px) {
+		gap: ${({ theme }) => theme.helpers.clamp(8, 16, 260, 1000)};
+		> svg {
+			width: ${({ theme }) => theme.helpers.clamp(8, 24, 260, 1000)};
+		}
+	}
 `;
 const TextSeparator = styled.div`
 	width: 1px;
-	height: 24px;
+	height: ${({ theme }) => theme.helpers.clamp(18, 24, 1000, 1920)};
 	border: 1px solid var(--Seperation);
+	@media only screen and (max-width: 1000px) {
+		height: ${({ theme }) => theme.helpers.clamp(18, 24, 260, 1000)};
+	}
 `;
 
 const DurationAndErrorsBlock = styled.div`
@@ -56,17 +86,31 @@ const DurationAndErrorsBlock = styled.div`
 	flex-direction: row;
 	align-items: center;
 	padding: 0px;
-	gap: 8px;
+	gap: ${({ theme }) => theme.helpers.clamp(1, 8, 1000, 1920)};
 	width: fit-content;
+	> svg {
+		width: ${({ theme }) => theme.helpers.clamp(18, 24, 1000, 1920)};
+	}
 	> p {
 		font-style: normal;
 		font-weight: 400;
-		font-size: 14px;
+		font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
 		line-height: 17px;
+		white-space: nowrap;
 		display: flex;
 		align-items: center;
 		text-align: center;
 		color: var(--Text-Body);
+	}
+
+	@media only screen and (max-width: 1000px) {
+		gap: ${({ theme }) => theme.helpers.clamp(1, 8, 260, 1000)};
+		> svg {
+			width: ${({ theme }) => theme.helpers.clamp(18, 24, 260, 1000)};
+		}
+		> p {
+			font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 260, 1000)};
+		}
 	}
 `;
 

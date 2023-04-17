@@ -1,6 +1,6 @@
 import PlayerBlock from "packages/UIKit/Player";
 import SessionEvents from "packages/UIKit/SessionEvents";
-import { SRScreen } from "./Blocks";
+import { SRScreen, SRScreenWrapper } from "./Blocks";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { useEffect } from "react";
 const SRWindow = () => {
@@ -28,10 +28,12 @@ const SRWindow = () => {
 	return (
 		<FullScreen handle={handle}>
 			<SRScreen>
-				<PlayerBlock
-					enterFullScreen={handle.active ? handle.exit : handle.enter}
-				/>
-				{handle.active ? null : <SessionEvents />}
+				<SRScreenWrapper>
+					<PlayerBlock
+						enterFullScreen={handle.active ? handle.exit : handle.enter}
+					/>
+					{handle.active ? null : <SessionEvents />}
+				</SRScreenWrapper>
 			</SRScreen>
 		</FullScreen>
 	);

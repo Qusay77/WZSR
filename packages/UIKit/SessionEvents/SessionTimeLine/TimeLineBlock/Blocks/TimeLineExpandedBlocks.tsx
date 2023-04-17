@@ -6,7 +6,7 @@ const TimeLineBlockExpandedContainer = styled.div`
 	justify-content: center;
 	align-items: flex-start;
 	padding: 16px;
-	gap: 32px;
+	gap: ${({ theme }) => theme.helpers.clamp(18, 32, 1000, 1920)};
 	isolation: isolate;
 	width: 100%;
 	height: fit-content;
@@ -25,7 +25,8 @@ const EssentialInfoBlock = styled.div`
 	p {
 		font-style: normal;
 		font-weight: 400;
-		font-size: 14px;
+		font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
+		white-space: nowrap;
 		line-height: 17px;
 	}
 	p:nth-of-type(1) {
@@ -42,11 +43,14 @@ const EssentialInfoBlockRow = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: 0px;
-	gap: 16px;
+	gap: ${({ theme }) => theme.helpers.clamp(12, 16, 1000, 1920)};
 	width: 100%;
 	height: 42px;
 	div:not(:last-child) {
 		border-right: 1px solid var(--Seperation);
+		p {
+			margin-right: 4px;
+		}
 	}
 `;
 
@@ -61,7 +65,7 @@ const MiniListBlock = styled.div`
 	> p {
 		font-style: normal;
 		font-weight: 400;
-		font-size: 14px;
+		font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
 		line-height: 17px;
 		color: var(--Text-Sub);
 	}
@@ -72,7 +76,7 @@ const MiniList = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 16px;
-	gap: 16px;
+	gap: ${({ theme }) => theme.helpers.clamp(8, 16, 1000, 1920)};
 	isolation: isolate;
 	width: 100%;
 	height: fit-content;
@@ -87,7 +91,7 @@ const MiniListItem = styled.div`
 	p {
 		font-family: "Inter";
 		font-style: normal;
-		font-size: 14px;
+		font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
 		line-height: 17px;
 		color: var(--Text-Body);
 	}

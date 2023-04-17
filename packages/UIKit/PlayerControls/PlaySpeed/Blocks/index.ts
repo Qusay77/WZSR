@@ -5,12 +5,15 @@ const SpeedBlock = styled.div`
 	flex-direction: row;
 	align-items: center;
 	padding: 4px;
-	/* width: ${({ theme }) => theme.helpers.clamp(0, 158, 200, 1920)}; */
 	width: 158px;
 	height: 40px;
 	background: var(--White);
 	border: 1px solid var(--Seperation);
 	border-radius: 32px;
+	@media only screen and (max-width: 800px) {
+		width: fit-content;
+		height: fit-content;
+	}
 `;
 
 const SpeedButton = styled.div<{ active?: boolean }>`
@@ -34,6 +37,13 @@ const SpeedButton = styled.div<{ active?: boolean }>`
 		box-shadow: 0 0 1px 1px #48abe0;
 	}
 	user-select: none;
+
+	@media only screen and (max-width: 800px) {
+		padding: 7.5px ${({ theme }) => theme.helpers.clamp(8, 16, 260, 800)};
+		width: fit-content;
+		height: ${({ theme }) => theme.helpers.clamp(12, 32, 260, 800)};
+		font-size: ${({ theme }) => theme.helpers.clamp(8, 14, 260, 800)};
+	}
 `;
 
 export { SpeedBlock, SpeedButton };

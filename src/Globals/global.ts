@@ -10,7 +10,7 @@ type calculateClampType = (
 const clamp: calculateClampType = (min, max, minScreen, maxScreen) => {
 	const vw = (100 * (max - min)) / (maxScreen - minScreen);
 	const r = (minScreen * max - maxScreen * min) / (minScreen - maxScreen) / 16;
-	return `clamp(${min / 16}rem,${vw}vw + ${r}rem,${max / 16}rem);`;
+	return `clamp(${min / 16}rem,${vw}vw + ${r}rem,${max / 16}rem)`;
 };
 
 const TextHeader = "#000000";

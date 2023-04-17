@@ -6,11 +6,20 @@ const SRScreen = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
+`;
+
+const SRScreenWrapper = styled.div`
+	position: relative;
 	background-color: #f0f0f0;
 	display: flex;
 	justify-content: center;
+	width: 100%;
+	height: 100vh;
 	align-items: center;
 	text-align: center;
+	@media only screen and (max-width: 1000px) {
+		flex-direction: column;
+	}
 `;
 
-export { SRScreen };
+export { SRScreen, SRScreenWrapper };

@@ -9,14 +9,19 @@ const TimeLineHeaderContainer = styled.div`
 	gap: 16px;
 	width: 100%;
 	height: 22px;
-	> P {
+	> p {
 		font-style: normal;
 		font-weight: 600;
-		font-size: 18px;
+		font-size: ${({ theme }) => theme.helpers.clamp(12, 18, 1000, 1920)};
 		line-height: 22px;
 		text-align: justify;
 		text-transform: capitalize;
 		color: var(--Text-Header);
+	}
+	@media only screen and (max-width: 1000px) {
+		> p {
+			font-size: ${({ theme }) => theme.helpers.clamp(12, 18, 260, 1000)};
+		}
 	}
 `;
 
@@ -24,14 +29,21 @@ const SwitchBlockContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 24px;
+	gap: ${({ theme }) => theme.helpers.clamp(10, 24, 1000, 1920)};
 	height: 20px;
 	> p {
 		font-style: normal;
 		font-weight: 400;
-		font-size: 14px;
+		font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
 		line-height: 17px;
 		color: var(--Text-Body);
+	}
+
+	@media only screen and (max-width: 1000px) {
+		gap: ${({ theme }) => theme.helpers.clamp(10, 24, 260, 1000)};
+		> p {
+			font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 260, 1000)};
+		}
 	}
 `;
 

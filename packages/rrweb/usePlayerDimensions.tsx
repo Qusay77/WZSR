@@ -31,13 +31,13 @@ const usePlayerDimensions = (PlayerRef: HTMLDivElement | null) => {
 			player__frame.style.width = "100%";
 			player__frame.style.height = "100%";
 		}
-		// PlayerInstance.addEventListener("resize", (replayDimensions) =>
-		// 	updatePlayerDimensions(replayDimensions, rect, rr_player, player__frame),
-		// );
-		// const windowResizeCallBack = () =>
-		// 	windowResize(rect, rr_player, player__frame);
-		// window.addEventListener("resize", windowResizeCallBack);
-		// return () => window.removeEventListener("resize", windowResizeCallBack);
+		PlayerInstance.addEventListener("resize", (replayDimensions) =>
+			updatePlayerDimensions(replayDimensions, rect, rr_player, player__frame),
+		);
+		const windowResizeCallBack = () =>
+			windowResize(rect, rr_player, player__frame);
+		window.addEventListener("resize", windowResizeCallBack);
+		return () => window.removeEventListener("resize", windowResizeCallBack);
 	}, [PlayerInstance]);
 
 	const windowResize = (
