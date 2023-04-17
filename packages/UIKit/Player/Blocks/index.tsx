@@ -7,6 +7,7 @@ const PlayerContainer = styled.div`
 	position: relative;
 	flex-direction: column;
 	flex: 1;
+	overflow: hidden;
 `;
 const PlayerControlsContainer = styled.div`
 	position: relative;
