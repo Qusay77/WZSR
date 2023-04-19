@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Dispatch, SetStateAction } from "react";
+import { Truncate } from ".";
 import { Error, Record, StyledArrowDown, StyledArrowUp, Warning } from "../svg";
 
 const TimeLineBlockInlineContainer = styled.div<{ expanded: boolean }>`
@@ -117,24 +118,41 @@ const DurationAndErrorsBlock = styled.div`
 const TimeLineBlockInline = ({
 	expanded,
 	setExpand,
+	name,
+	duration,
+	isError,
+	type,
+	hasErrors,
 }: {
 	expanded: boolean;
 	setExpand: Dispatch<SetStateAction<boolean>>;
+	name?: string;
+	duration?: string;
+	isError?: boolean;
+	type?: string;
+	hasErrors?: Array<string | undefined>;
 }) => {
 	const onExpandClick = () => {
 		setExpand((prev) => !prev);
 	};
+	const durationStr = duration ? duration?.split(".")[0] : "";
+	const hasJsError =
+		hasErrors?.find((e) => e === "js_error") ||
+		(isError && type === "js_error");
+	const hasOtherErrors =
+		hasErrors?.find((e) => e !== "js_error") ||
+		(isError && type !== "js_error");
 	return (
 		<TimeLineBlockInlineContainer expanded={expanded}>
 			<TypeBlock>
 				<Record />
-				<p>Page Name</p>
+				<Truncate>{name}</Truncate>
 			</TypeBlock>
 			<InfoBlock>
 				<DurationAndErrorsBlock>
-					<Error />
-					<Warning />
-					<p>00:00</p>
+					{hasJsError ? <Error /> : ""}
+					{hasOtherErrors ? <Warning /> : ""}
+					<p>{durationStr}</p>
 				</DurationAndErrorsBlock>
 				<TextSeparator />
 				{expanded ? (

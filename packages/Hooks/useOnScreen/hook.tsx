@@ -37,7 +37,7 @@ function OnScreenWrapper({
 	children,
 	styleFunction,
 }: {
-	children: ReactNode[];
+	children: ReactNode[] | ReactNode;
 	styleFunction: (arg: boolean) => React.CSSProperties;
 }) {
 	const ref = useRef(null);

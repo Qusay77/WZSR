@@ -76,5 +76,25 @@ const InfoBlock = styled.div`
 		}
 	}
 `;
+const TextSeparator = styled.div`
+	width: 1px;
+	height: 17px;
+	border: 1px solid var(--Seperation);
+`;
 
-export { InfoExpandableContainer, ShowMore, InfoBlocksContainer, InfoBlock };
+const Truncate = styled.p`
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100px;
+	cursor: pointer;
+`;
+
+export {
+	InfoExpandableContainer,
+	ShowMore,
+	InfoBlocksContainer,
+	InfoBlock,
+	TextSeparator,
+	Truncate,
+};

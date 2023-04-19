@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 
-const TimeLineBlockContainer = styled.div`
+const TimeLineBlockContainer = styled.div<{ render?: boolean }>`
 	width: 100%;
 	height: fit-content;
+	display: ${({ render }) => (render ? "none" : "unset")};
 `;
 
 const TimeLineExpandedList = styled.div<{ expanded: boolean }>`
@@ -30,5 +31,24 @@ const TimeLineExpandedGroup = styled.div`
 	width: 100%;
 	height: fit-content;
 	box-sizing: border-box;
+	gap: 16px;
+	display: flex;
+	flex-direction: column;
 `;
-export { TimeLineBlockContainer, TimeLineExpandedList, TimeLineExpandedGroup };
+
+const Truncate = styled.p`
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: ${({ theme }) => theme.helpers.clamp(80, 160, 1000, 1920)};
+	@media only screen and (max-width: 1000px) {
+		max-width: ${({ theme }) => theme.helpers.clamp(80, 700, 260, 1000)};
+	}
+`;
+
+export {
+	TimeLineBlockContainer,
+	TimeLineExpandedList,
+	TimeLineExpandedGroup,
+	Truncate,
+};

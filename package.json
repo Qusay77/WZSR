@@ -45,6 +45,7 @@
 		"react-router-dom": "^6.7.0",
 		"react-switch": "^7.0.0",
 		"react-toastify": "^9.1.2",
+		"react-tooltip": "^5.11.1",
 		"rrweb-player": "^1.0.0-alpha.4",
 		"serve": "^14.1.2",
 		"storybook": "^7.0.5",

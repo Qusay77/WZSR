@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import ToggleSwitch from "packages/UIKit/ToggleSwitch";
+import { useDispatch, useSelector } from "react-redux";
+import { EventsDetails, setIsErrorsOnly } from "store/state/EventsDetails";
 
 const TimeLineHeaderContainer = styled.div`
 	display: flex;
@@ -48,12 +50,19 @@ const SwitchBlockContainer = styled.div`
 `;
 
 const SessionTimeLineHeader = () => {
+	const dispatch = useDispatch();
+	const { errorsOnly } = useSelector(
+		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
+	);
 	return (
 		<TimeLineHeaderContainer>
 			<p>Session Timeline</p>
 			<SwitchBlockContainer>
 				<p>Errors only</p>
-				<ToggleSwitch />
+				<ToggleSwitch
+					checked={errorsOnly}
+					onChange={() => dispatch(setIsErrorsOnly())}
+				/>
 			</SwitchBlockContainer>
 		</TimeLineHeaderContainer>
 	);

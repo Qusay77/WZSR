@@ -31,6 +31,7 @@ const EssentialInfoBlock = styled.div`
 	}
 	p:nth-of-type(1) {
 		color: var(--Text-Sub);
+		margin-bottom: auto;
 	}
 	p:nth-of-type(2) {
 		color: var(--Text-Body);
@@ -102,48 +103,47 @@ const MiniListItem = styled.div`
 		font-weight: 400;
 	}
 `;
-const TimeLineBlockExpanded = () => {
+const TimeLineBlockExpanded = ({
+	method,
+	status,
+	duration,
+	custom_data,
+}: {
+	duration?: string;
+	method?: string;
+	status?: number;
+	custom_data?: Array<{ definitionName: string; value: string }> | null;
+}) => {
+	const durationStr = duration ? duration?.split(".")[0] : "";
 	return (
 		<TimeLineBlockExpandedContainer>
 			<EssentialInfoBlockRow>
 				<EssentialInfoBlock>
 					<p>Status Code</p>
-					<p>200</p>
+					<p>{status ?? "No Info"}</p>
 				</EssentialInfoBlock>
 				<EssentialInfoBlock>
 					<p>Method</p>
-					<p>GET</p>
+					<p>{method ?? "No Info"}</p>
 				</EssentialInfoBlock>
 				<EssentialInfoBlock>
 					<p>Duration</p>
-					<p>4.33 sec</p>
+					<p>{durationStr ?? "No Info"}</p>
 				</EssentialInfoBlock>
 			</EssentialInfoBlockRow>
-			<MiniListBlock>
-				<p>Custom Data</p>
-				<MiniList>
-					<MiniListItem>
-						<p>Search:</p>
-						<p>hanukkah+menorah</p>
-					</MiniListItem>
-					<MiniListItem>
-						<p>Search:</p>
-						<p>hanukkah+menorah</p>
-					</MiniListItem>
-					<MiniListItem>
-						<p>Search:</p>
-						<p>hanukkah+menorah</p>
-					</MiniListItem>
-					<MiniListItem>
-						<p>Search:</p>
-						<p>hanukkah+menorah</p>
-					</MiniListItem>
-					<MiniListItem>
-						<p>Search:</p>
-						<p>hanukkah+menorah</p>
-					</MiniListItem>
-				</MiniList>
-			</MiniListBlock>
+			{custom_data ? (
+				<MiniListBlock>
+					<p>Custom Data</p>
+					<MiniList>
+						{custom_data.map(({ definitionName, value }, i) => (
+							<MiniListItem key={`${i}-mini-list`}>
+								<p>{definitionName}:</p>
+								<p>{value}</p>
+							</MiniListItem>
+						))}
+					</MiniList>
+				</MiniListBlock>
+			) : null}
 		</TimeLineBlockExpandedContainer>
 	);
 };
