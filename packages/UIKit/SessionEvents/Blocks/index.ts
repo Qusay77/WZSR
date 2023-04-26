@@ -8,11 +8,16 @@ const SessionEventsContainer = styled.div`
 	isolation: isolate;
 	background: var(--White);
 	border-left: 1px solid var(--Seperation);
-	flex-basis: ${({ theme }) => theme.helpers.clamp(300, 555, 1000, 1920)};
-	flex-grow: 0;
-	flex-shrink: 0;
 	overflow-y: auto;
 	height: 100%;
+	@media only screen and (min-width: 800px) {
+		flex-grow: 0;
+		flex-shrink: 0;
+		flex-basis: ${({ theme }) => theme.helpers.clamp(300, 555, 1000, 1920)};
+	}
+	@media only screen and (max-width: 800px) {
+		max-height: 100%;
+	}
 	@media only screen and (max-width: 1000px) {
 		width: 100%;
 		border-top: 1px solid var(--Seperation);

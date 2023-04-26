@@ -6,11 +6,11 @@ const SRScreen = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
+	background-color: #f0f0f0;
 `;
 
 const SRScreenWrapper = styled.div`
 	position: relative;
-	background-color: #f0f0f0;
 	display: flex;
 	justify-content: center;
 	width: 100%;
