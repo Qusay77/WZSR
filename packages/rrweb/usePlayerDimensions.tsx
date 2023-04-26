@@ -73,8 +73,12 @@ const usePlayerDimensions = (PlayerRef: HTMLDivElement | null) => {
 		if (Player) {
 			if (screenWidth >= 800) {
 				Player.style.height = "calc(100% - 88px)";
+				Player.style.width = "100%";
 				if (PlayerRef) {
 					PlayerRef.style.height = "100%";
+					PlayerRef.style.width = "100%";
+					Frame.style.height = "100%";
+					Frame.style.width = "100%";
 				}
 			} else if (screenWidth < 800) {
 				if (wrapperRect && PlayerRef) {

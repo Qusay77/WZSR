@@ -6,24 +6,10 @@ import { useEffect } from "react";
 const SRWindow = () => {
 	const handle = useFullScreenHandle();
 	useEffect(() => {
-		if (!handle.active) {
-			const rr_player = Array.from(
-				document.getElementsByClassName(
-					"rr-player",
-				) as HTMLCollectionOf<HTMLElement>,
-			)[0];
-			const player__frame = Array.from(
-				document.getElementsByClassName(
-					"rr-player__frame",
-				) as HTMLCollectionOf<HTMLElement>,
-			)[0];
-			if (rr_player) {
-				rr_player.style.width = "100%";
-				rr_player.style.height = "100%";
-				player__frame.style.width = "100%";
-				player__frame.style.height = "100%";
-			}
-		}
+		const timeoutId = setTimeout(() => {
+			window.dispatchEvent(new Event("resize"));
+		}, 100);
+		return () => clearTimeout(timeoutId);
 	}, [handle.active]);
 	return (
 		<FullScreen handle={handle}>
