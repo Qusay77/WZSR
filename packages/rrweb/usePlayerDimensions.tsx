@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { clamp } from "src/Globals/global";
 import { PlayerStateTypes } from "store/state/PlayerStore";
-// scaling issues for later
 
 const usePlayerDimensions = (PlayerRef: HTMLDivElement | null) => {
 	const { PlayerInstance } = useSelector(

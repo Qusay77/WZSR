@@ -1,2 +1,2 @@
-import Toast from "./Toast";
-export default Toast;
+import { ToastComponent, toastMessage } from "./Toast";
+export { ToastComponent, toastMessage };

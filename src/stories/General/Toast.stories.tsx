@@ -1,18 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Toast from "packages/UIKit/Toast";
+import { ToastComponent } from "packages/UIKit/Toast";
 
 const meta = {
 	title: "General/Toast",
-	component: Toast,
-	parameters: {
-		layout: "fullscreen",
-		controls: {
-			exclude: /.*/g,
+	component: ToastComponent,
+	argTypes: {
+		type: {
+			options: ["error", "success"],
+			control: { type: "radio" },
 		},
 	},
-} satisfies Meta<typeof Toast>;
+	parameters: {
+		layout: "fullscreen",
+	},
+} satisfies Meta<typeof ToastComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {};
+export const Basic: Story = {
+	args: {
+		type: "error",
+	},
+};
