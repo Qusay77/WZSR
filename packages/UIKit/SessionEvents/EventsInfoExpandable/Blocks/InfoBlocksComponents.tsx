@@ -16,6 +16,7 @@ import styled from "@emotion/styled";
 import { BrowserType, DevicesTypes, ValueType } from "./types";
 import { TextSeparator, Truncate } from ".";
 import { copyToClipboard } from "packages/utils";
+import { useState } from "react";
 const Devices: DevicesTypes = {
 	Mobile,
 	Desktop,
@@ -23,6 +24,9 @@ const Devices: DevicesTypes = {
 };
 const StyledCopy = styled(Copy)`
 	cursor: pointer;
+	&:hover {
+		transform: scale(1.2);
+	}
 `;
 
 const SessionTimeBlock = ({ value }: ValueType) => {
@@ -72,13 +76,21 @@ const BrowserBlock = ({ value }: { value: BrowserType }) => {
 };
 
 const UserIdBlock = ({ value }: ValueType) => {
+	const [copied, setCopied] = useState(false);
 	return (
 		<div>
 			<User />
+			<Tooltip id="#userIdCopy">{copied ? "Copied" : "Copy"}</Tooltip>
 			<Tooltip id="#userId">{value}</Tooltip>
 			<span>
 				<Truncate data-tooltip-id="#userId">{value}</Truncate> <TextSeparator />
-				<StyledCopy onClick={() => copyToClipboard(value)} />
+				<StyledCopy
+					data-tooltip-id="#userIdCopy"
+					onClick={() => {
+						setCopied(true);
+						copyToClipboard(value);
+					}}
+				/>
 			</span>
 		</div>
 	);
