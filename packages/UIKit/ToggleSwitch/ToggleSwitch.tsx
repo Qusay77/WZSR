@@ -27,7 +27,12 @@ const WZConfig = {
 	width: 36,
 	borderRadius: 33,
 };
-const ToggleSwitch = ({ onChange, checked, externalConfig }: SwitchTypes) => {
+const ToggleSwitch = ({
+	onChange,
+	checked,
+	disabled,
+	externalConfig,
+}: SwitchTypes) => {
 	const [defaultState, setDefault] = useState(false);
 	const handleChange = () => {
 		setDefault((prev) => !prev);
@@ -38,6 +43,7 @@ const ToggleSwitch = ({ onChange, checked, externalConfig }: SwitchTypes) => {
 		<StyledSwitch
 			onChange={onChange ?? handleChange}
 			checked={checked ?? defaultState}
+			disabled={disabled}
 			{...config}
 		/>
 	);

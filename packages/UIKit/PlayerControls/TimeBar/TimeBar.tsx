@@ -3,7 +3,8 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { TimeRangeInput } from "./Blocks";
 
 const TimeBar = () => {
-	const { PlayerInstance, totalTime, play, timer } = usePlayer(true);
+	const { PlayerInstance, totalTime, play, timer, isSkipping } =
+		usePlayer(true);
 
 	const [isMouseDown, setIsMouseDown] = useState(false);
 	const [cloneState, setCloneState] = useState(timer);
@@ -46,6 +47,7 @@ const TimeBar = () => {
 	const backgroundSize = ((val - min) * 100) / (max - min) + "% 100%";
 	return (
 		<TimeRangeInput
+			isSkipping={isSkipping}
 			type="range"
 			value={val}
 			min={min}

@@ -14,7 +14,7 @@ const PlayerControls = ({
 }: {
 	enterFullScreen: () => void;
 }) => {
-	const { toggleSkip, skip } = usePlayer(true);
+	const { toggleSkip, skip, isSkipping } = usePlayer(true);
 	return (
 		<PlayerControlsContainer>
 			<TimeBar />
@@ -30,7 +30,11 @@ const PlayerControls = ({
 					<PlayerSpeed />
 					<TextSeparator />
 					<p>Skip Idle Time</p>
-					<ToggleSwitch checked={skip} onChange={toggleSkip} />
+					<ToggleSwitch
+						disabled={isSkipping}
+						checked={skip}
+						onChange={toggleSkip}
+					/>
 				</SpeedAndToggleBlock>
 			</PlayerControlsInnerContainer>
 		</PlayerControlsContainer>

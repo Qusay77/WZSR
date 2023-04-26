@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import rrwebPlayer from "rrweb-player";
 import {
 	PlayerStateTypes,
+	setIsSkipping,
 	setPlay,
 	setTimerScale,
 } from "store/state/PlayerStore";
@@ -49,6 +50,10 @@ const usePlayerEventListener = (element: rrwebPlayer | null) => {
 			dispatch(setTimerScale(scale));
 		}
 	};
+
+	const handleSkipping = (value: boolean) => {
+		dispatch(setIsSkipping(value));
+	};
 	const savedFunctions = useRef<CallBackArrayType>(null);
 	const events: Array<EventType> = [
 		{
@@ -62,6 +67,14 @@ const usePlayerEventListener = (element: rrwebPlayer | null) => {
 		{
 			eventName: "ui-update-progress",
 			callBack: (arg) => handleTimer(arg?.payload as number),
+		},
+		{
+			eventName: "skip-start",
+			callBack: () => handleSkipping(true),
+		},
+		{
+			eventName: "skip-end",
+			callBack: () => handleSkipping(false),
 		},
 	];
 	useEffect(() => {

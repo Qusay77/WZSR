@@ -29,7 +29,10 @@ const reset = css`
 	border: none;
 	background: transparent;
 `;
-const TimeRangeInput = styled.input<{ backgroundSize: string }>`
+const TimeRangeInput = styled.input<{
+	backgroundSize: string;
+	isSkipping: boolean;
+}>`
 	user-select: none;
 	z-index: 9;
 	width: 100%;
@@ -37,6 +40,8 @@ const TimeRangeInput = styled.input<{ backgroundSize: string }>`
 	appearance: none;
 	background: #e6e6e6;
 	outline: none;
+	opacity: ${({ isSkipping }) => (isSkipping ? "0.5" : "1")};
+	pointer-events: ${({ isSkipping }) => (isSkipping ? "none" : "unset")};
 	background-image: linear-gradient(
 		var(--Purple-Primary),
 		var(--Purple-Primary)

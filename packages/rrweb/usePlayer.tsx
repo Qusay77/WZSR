@@ -7,9 +7,10 @@ import {
 import usePlayerEventListener from "./usePlayerEventListener";
 
 const usePlayer = (init?: boolean) => {
-	const { PlayerInstance, play, timer, metaData, skip, speed } = useSelector(
-		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
-	);
+	const { PlayerInstance, play, timer, metaData, skip, speed, isSkipping } =
+		useSelector(
+			({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
+		);
 	const { totalTime } = metaData;
 	const dispatch = useDispatch();
 	if (init) {
@@ -45,6 +46,7 @@ const usePlayer = (init?: boolean) => {
 		speed,
 		metaData,
 		totalTime,
+		isSkipping,
 	};
 };
 

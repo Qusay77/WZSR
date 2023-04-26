@@ -11,7 +11,7 @@ import {
 } from "store/state/PlayerStore";
 import { PlayerMount } from "./Blocks";
 import usePlayerDimensions from "./usePlayerDimensions";
-
+import { events } from "./events";
 const Player = () => {
 	const PlayerRef = useRef(null);
 	const dispatch = useDispatch();
@@ -31,10 +31,12 @@ const Player = () => {
 			const newPlayer = new rrwebPlayer({
 				target: PlayerRef.current,
 				props: {
-					events: JSON.parse(data),
+					// events: JSON.parse(data),
+					events,
 					showController: false,
 					autoPlay: false,
 					useVirtualDom: true,
+					skipInactive: false,
 				},
 			});
 			const meta = newPlayer.getMetaData();

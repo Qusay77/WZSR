@@ -7,6 +7,7 @@ interface PlayerStateTypes {
 	play: boolean;
 	timer: number;
 	speed: number;
+	isSkipping: boolean;
 	metaData: {
 		startTime: number;
 		endTime: number;
@@ -19,6 +20,7 @@ const initialState = {
 	play: false,
 	speed: 1,
 	timer: 0,
+	isSkipping: false,
 	metaData: {
 		startTime: 0,
 		endTime: 0,
@@ -31,6 +33,9 @@ const PlayerSlice = createSlice({
 	reducers: {
 		setPlayer(state, action: PayloadAction<rrwebPlayer | null>) {
 			state.PlayerInstance = action.payload;
+		},
+		setIsSkipping(state, action: PayloadAction<boolean>) {
+			state.isSkipping = action.payload;
 		},
 		setSkipToggle(state) {
 			state.skip = !state.skip;
@@ -66,5 +71,6 @@ export const {
 	resetPlayer,
 	setMetaData,
 	setSpeed,
+	setIsSkipping,
 } = PlayerSlice.actions;
 export default PlayerSlice;
