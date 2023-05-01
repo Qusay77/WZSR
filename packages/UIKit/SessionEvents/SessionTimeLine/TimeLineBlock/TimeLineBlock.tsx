@@ -66,8 +66,10 @@ const TimeLineBlock = ({
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
 	const render = errorsOnly ? !hasErrors.length : false;
-	return (
-		<TimeLineBlockContainer render={render}>
+	// console.log(event);
+	// goto
+	return !render ? (
+		<TimeLineBlockContainer>
 			<TimeLineBlockInline
 				name={name}
 				duration={duration}
@@ -79,7 +81,7 @@ const TimeLineBlock = ({
 				{expanded ? <TimeLineGroup group={data} /> : null}
 			</TimeLineExpandedList>
 		</TimeLineBlockContainer>
-	);
+	) : null;
 };
 
 export default TimeLineBlock;

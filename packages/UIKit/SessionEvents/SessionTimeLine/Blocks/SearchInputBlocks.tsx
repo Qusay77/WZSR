@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import { ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { EventsDetails, setSearchValue } from "store/state/EventsDetails";
 import { ReactComponent as Search } from "../svg/search.svg";
 
 const SearchInput = styled.input`
@@ -49,10 +52,23 @@ const StyledSearchIcon = styled(Search)`
 	left: 16px;
 `;
 const TimeLineSearch = () => {
+	const { searchValue } = useSelector(
+		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
+	);
+	const dispatch = useDispatch();
+
+	const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+		dispatch(setSearchValue(e.target.value));
+	};
 	return (
 		<SearchInputContainer>
 			<StyledSearchIcon />
-			<SearchInput type={"text"} placeholder={"Search Events"} />
+			<SearchInput
+				value={searchValue}
+				onChange={handleSearch}
+				type={"text"}
+				placeholder={"Search Events"}
+			/>
 		</SearchInputContainer>
 	);
 };

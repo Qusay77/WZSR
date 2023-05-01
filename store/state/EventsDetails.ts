@@ -18,11 +18,13 @@ interface EventsDetails {
 		USERBROWSERVERSION: string;
 	} | null;
 	errorsOnly: boolean;
+	searchValue: string;
 }
 const initialState = {
 	events: mock.data || [],
 	details: mock.sessionDetails || null,
 	errorsOnly: false,
+	searchValue: "",
 } as EventsDetails;
 const EventDetailsSlice = createSlice({
 	name: "EventsState",
@@ -42,8 +44,12 @@ const EventDetailsSlice = createSlice({
 		setIsErrorsOnly(state) {
 			state.errorsOnly = !state.errorsOnly;
 		},
+		setSearchValue(state, action: PayloadAction<string>) {
+			state.searchValue = action.payload;
+		},
 	},
 });
 export type { EventsDetails };
-export const { setEvents, setIsErrorsOnly } = EventDetailsSlice.actions;
+export const { setEvents, setIsErrorsOnly, setSearchValue } =
+	EventDetailsSlice.actions;
 export default EventDetailsSlice;

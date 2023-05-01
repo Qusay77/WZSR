@@ -52,7 +52,7 @@ const mobileShare = () => {
 		navigator
 			.share({
 				title: document.title,
-				text: "Lost Revenue Simulator Results",
+				text: "SR",
 				url: location.href,
 			})
 			.then(() => console.log("Successful share"))

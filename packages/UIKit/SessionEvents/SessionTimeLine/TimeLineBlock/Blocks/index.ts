@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 
-const TimeLineBlockContainer = styled.div<{ render?: boolean }>`
+const TimeLineBlockContainer = styled.div`
 	width: 100%;
 	height: fit-content;
-	display: ${({ render }) => (render ? "none" : "unset")};
 `;
 
 const TimeLineExpandedList = styled.div<{ expanded: boolean }>`
