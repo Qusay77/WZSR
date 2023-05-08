@@ -5,8 +5,8 @@ import SRHeader from "./SRHeader";
 import { useFetchSessionDetailsQuery } from "src/services/details";
 const SessionEvents = () => {
 	useFetchSessionDetailsQuery({
-		orgId: 769,
-		sessionId: 1447895985699487700,
+		orgId: 645,
+		sessionId: 4871628925818847000,
 	});
 
 	return (
