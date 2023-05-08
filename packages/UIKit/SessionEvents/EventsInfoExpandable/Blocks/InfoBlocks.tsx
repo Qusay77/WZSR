@@ -62,14 +62,15 @@ const InfoBlocks = ({ showMore }: { showMore: boolean }) => {
 
 	return (
 		<InfoBlocksContainer>
-			{InfoMap.map(({ label, Component }, i) =>
-				showMore && i > 1 ? null : (
-					<InfoBlock key={`info-block-${i}`}>
-						<p>{label}</p>
-						<Component value={(match[label] as keyof ComponentProps) || ""} />
-					</InfoBlock>
-				),
-			)}
+			{details &&
+				InfoMap.map(({ label, Component }, i) =>
+					showMore && i > 1 ? null : (
+						<InfoBlock key={`info-block-${i}`}>
+							<p>{label}</p>
+							<Component value={(match[label] as keyof ComponentProps) || ""} />
+						</InfoBlock>
+					),
+				)}
 		</InfoBlocksContainer>
 	);
 };

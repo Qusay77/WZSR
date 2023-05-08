@@ -1,6 +1,6 @@
+import DetailsAPi from "src/services/details";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import mock from "src/services/details";
 import { GroupType } from "packages/UIKit/SessionEvents/SessionTimeLine/TimeLineBlock/types";
 interface EventsDetails {
 	events: Array<{
@@ -21,8 +21,8 @@ interface EventsDetails {
 	searchValue: string;
 }
 const initialState = {
-	events: mock.data || [],
-	details: mock.sessionDetails || null,
+	events: [],
+	details: null,
 	errorsOnly: false,
 	searchValue: "",
 } as EventsDetails;
@@ -47,6 +47,17 @@ const EventDetailsSlice = createSlice({
 		setSearchValue(state, action: PayloadAction<string>) {
 			state.searchValue = action.payload;
 		},
+	},
+	extraReducers: (builder) => {
+		builder.addMatcher(
+			DetailsAPi.endpoints.fetchSessionDetails.matchFulfilled,
+			(state, action) => {
+				// pretend this field and this payload data exist for sake of example
+				const { sessionDetails, data } = action.payload;
+				state.events = data;
+				state.details = sessionDetails;
+			},
+		);
 	},
 });
 export type { EventsDetails };

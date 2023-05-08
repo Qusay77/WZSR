@@ -12,6 +12,7 @@ const baseQueryController: BaseQueryFn<
 > = async (args, api, extraOptions) => {
 	const customHeaders = {
 		"Content-Type": "application/json",
+		Authorization: `Bearer ${import.meta.env.VITE_APP_API_TOKEN}`,
 	};
 
 	const result = await fetchBaseQuery({

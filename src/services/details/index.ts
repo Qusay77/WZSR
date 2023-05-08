@@ -1,2 +1,4 @@
-import mock from "./mock";
-export default mock;
+import { useFetchSessionDetailsQuery } from "./details";
+import RecordApi from "./details";
+export { useFetchSessionDetailsQuery };
+export default RecordApi;
