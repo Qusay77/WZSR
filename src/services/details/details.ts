@@ -11,7 +11,7 @@ const api = createApi({
 				const { orgId, sessionId } = params || {};
 				return `${
 					import.meta.env.VITE_APP_API_KEY
-				}v2/sr/sessions/${orgId}/${sessionId}`;
+				}sr/v2/sessions/${orgId}/${sessionId}`;
 			},
 		}),
 	}),
