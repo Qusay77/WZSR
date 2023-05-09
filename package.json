@@ -2,6 +2,7 @@
 	"name": "WZSR",
 	"version": "1.0.0",
 	"description": "session recording module for webeyez",
+	"homepage": "/wz-sr/",
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
@@ -10,7 +11,9 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"chromatic": "npx chromatic --project-token=76aa108d01f0",
-		"cy:open": " cypress open"
+		"cy:open": " cypress open",
+		"predeploy": "yarn build",
+		"deploy": "gh-pages -d dist"
 	},
 	"author": "WZ",
 	"license": "ISC",
@@ -44,6 +47,7 @@
 		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.7.0",
 		"react-switch": "^7.0.0",
+		"react-to-webcomponent": "^1.7.6",
 		"react-toastify": "^9.1.2",
 		"react-tooltip": "^5.11.1",
 		"rrweb-player": "^1.0.0-alpha.4",
@@ -52,6 +56,7 @@
 		"ts-loader": "^9.4.2",
 		"typescript": "^4.9.4",
 		"use-deep-compare-effect": "^1.8.1",
+		"vite-plugin-dts": "^2.3.0",
 		"vite-plugin-svgr": "^2.4.0",
 		"vite-tsconfig-paths": "^4.0.7"
 	},
@@ -76,10 +81,12 @@
 		"eslint": "^8.28.0",
 		"eslint-plugin-react": "^7.31.11",
 		"eslint-plugin-storybook": "^0.6.11",
+		"gh-pages": "^5.0.0",
 		"process": "^0.11.10",
 		"prop-types": "15.8.1",
 		"tsconfig-paths": "^4.1.2",
-		"vite": "^4.2.1"
+		"vite": "^4.2.1",
+		"vite-plugin-libcss": "^1.0.6"
 	},
 	"private": true,
 	"workspaces": [
@@ -90,6 +97,18 @@
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"main": "./dist/WZSR.umd.js",
+	"module": "./dist/WZSR.es.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/WZSR.es.js",
+			"require": "./dist/WZSR.umd.js"
 		}
 	}
 }
