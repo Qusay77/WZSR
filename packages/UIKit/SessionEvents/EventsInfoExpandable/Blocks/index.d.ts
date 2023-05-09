@@ -1,0 +1,26 @@
+/// <reference types="react" />
+declare const InfoExpandableContainer: import("@emotion/styled").StyledComponent<{
+    theme?: import("@emotion/react").Theme | undefined;
+    as?: import("react").ElementType<any> | undefined;
+}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+declare const ShowMore: import("@emotion/styled").StyledComponent<{
+    theme?: import("@emotion/react").Theme | undefined;
+    as?: import("react").ElementType<any> | undefined;
+}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+declare const InfoBlocksContainer: import("@emotion/styled").StyledComponent<{
+    theme?: import("@emotion/react").Theme | undefined;
+    as?: import("react").ElementType<any> | undefined;
+}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+declare const InfoBlock: import("@emotion/styled").StyledComponent<{
+    theme?: import("@emotion/react").Theme | undefined;
+    as?: import("react").ElementType<any> | undefined;
+}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+declare const TextSeparator: import("@emotion/styled").StyledComponent<{
+    theme?: import("@emotion/react").Theme | undefined;
+    as?: import("react").ElementType<any> | undefined;
+}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, {}>;
+declare const Truncate: import("@emotion/styled").StyledComponent<{
+    theme?: import("@emotion/react").Theme | undefined;
+    as?: import("react").ElementType<any> | undefined;
+}, import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>, {}>;
+export { InfoExpandableContainer, ShowMore, InfoBlocksContainer, InfoBlock, TextSeparator, Truncate, };
