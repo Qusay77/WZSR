@@ -10,3 +10,10 @@ declare module "*.svg" {
 	const src: string;
 	export default src;
 }
+
+declare module "https://sr.webeyez.dev/module/WZSR.mjs" {
+	const value: {
+		default: HTMLElement;
+	};
+	export default value as CustomElementConstructor;
+}

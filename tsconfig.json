@@ -23,7 +23,14 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "@emotion/react"
 	},
-	"include": ["src/**/*", "store", "packages", "custom.d.ts", "emotion.d.ts"],
+	"include": [
+		"src/**/*",
+		"store",
+		"packages",
+		"custom.d.ts",
+		"custom-elements.d.ts",
+		"emotion.d.ts"
+	],
 	"paths": {
 		"src/*": ["src/*"],
 		"packages/*": ["packages/*"]
