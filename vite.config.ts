@@ -11,6 +11,9 @@ export default defineConfig(({ mode }) => {
 			build: {
 				outDir: "./module",
 				cssCodeSplit: false,
+				commonjsOptions: {
+					include: [/node_modules/],
+				},
 				lib: {
 					entry: resolve(__dirname, "src/web.ts"),
 					name: "WZSR",
