@@ -5,6 +5,7 @@
 	"homepage": "/wz-sr/",
 	"scripts": {
 		"build": "vite build",
+		"lib": "vite build --mode lib",
 		"dev": "vite",
 		"lint": "eslint --ext .js,.jsx,.tsx,.ts --fix ./src ./packages .storybook",
 		"prepare": "husky install .config/husky",
@@ -57,7 +58,6 @@
 		"typescript": "^4.9.4",
 		"use-deep-compare-effect": "^1.8.1",
 		"vite-plugin-css-injected-by-js": "^3.1.1",
-		"vite-plugin-dts": "^2.3.0",
 		"vite-plugin-svgr": "^2.4.0",
 		"vite-tsconfig-paths": "^4.0.7"
 	},
@@ -86,8 +86,7 @@
 		"process": "^0.11.10",
 		"prop-types": "15.8.1",
 		"tsconfig-paths": "^4.1.2",
-		"vite": "^4.2.1",
-		"vite-plugin-libcss": "^1.0.6"
+		"vite": "^4.2.1"
 	},
 	"private": true,
 	"workspaces": [

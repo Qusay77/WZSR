@@ -10,3 +10,4 @@ storybook-static
 yarn.lock
 package-lock.json
 yarn-error.log
+module/
