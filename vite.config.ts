@@ -18,14 +18,7 @@ export default defineConfig(({ mode }) => {
 					fileName: "WZSR",
 				},
 				rollupOptions: {
-					external: ["react", "react-dom"],
 					manualChunks: undefined,
-					output: {
-						globals: {
-							react: "React",
-							"react-dom": "ReactDOM",
-						},
-					},
 				},
 			},
 			css: {
