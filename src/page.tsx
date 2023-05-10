@@ -1,14 +1,14 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import SessionRecording from "./lib";
-// import "../scripts/srIIFE";
+// import SessionRecording from "./lib";
+import "https://sr.webeyez.dev/module/srIIFE.js";
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
 	const root = ReactDOM.createRoot(rootElement);
 	root.render(
 		<StrictMode>
-			<SessionRecording />
+			{/* <SessionRecording /> */}
 			<wz-sr></wz-sr>
 		</StrictMode>,
 	);
