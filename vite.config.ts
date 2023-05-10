@@ -4,7 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
 import { resolve } from "path";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
-
+import viteCompression from "vite-plugin-compression";
 export default defineConfig(({ mode }) => {
 	if (mode === "lib") {
 		return {
@@ -32,11 +32,17 @@ export default defineConfig(({ mode }) => {
 			define: {
 				"process.env": process.env,
 			},
-			plugins: [react(), tsconfigPaths(), svgr(), cssInjectedByJsPlugin()],
+			plugins: [
+				react(),
+				tsconfigPaths(),
+				svgr(),
+				cssInjectedByJsPlugin(),
+				viteCompression(),
+			],
 		};
 	}
 
 	return {
-		plugins: [react(), tsconfigPaths(), svgr()],
+		plugins: [react(), tsconfigPaths(), svgr(), viteCompression()],
 	};
 });
