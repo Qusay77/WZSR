@@ -1,25 +1,15 @@
-import { StrictMode, useEffect } from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-// import SessionRecording from "./lib";
-const SessionRecording = () => {
-	useEffect(() => {
-		const tagName = "wz-sr";
-		if (typeof customElements !== "undefined") {
-			import("https://sr.webeyez.dev/module/WZSR.mjs").then((module) => {
-				if (!customElements.get("wz-sr")) {
-					customElements.define(tagName, module.default);
-				}
-			});
-		}
-	}, []);
-	return <wz-sr></wz-sr>;
-};
+import SessionRecording from "./lib";
+// import "../scripts/srIIFE";
+
 const rootElement = document.getElementById("root");
 if (rootElement) {
 	const root = ReactDOM.createRoot(rootElement);
 	root.render(
 		<StrictMode>
 			<SessionRecording />
+			<wz-sr></wz-sr>
 		</StrictMode>,
 	);
 }

@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => {
 				rollupOptions: {
 					manualChunks: undefined,
 				},
+				assetsInclude: ["./scripts/srIIFE.js"],
 			},
 			css: {
 				preprocessorOptions: {
