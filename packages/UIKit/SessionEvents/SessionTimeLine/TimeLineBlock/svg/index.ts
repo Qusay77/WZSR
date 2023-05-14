@@ -11,5 +11,7 @@ const StyledArrowUp = styled(ArrowUp)`
 const StyledArrowDown = styled(ArrowDown)`
 	cursor: pointer;
 `;
-
-export { StyledArrowDown, StyledArrowUp, Error, Record, Warning };
+const StyledRecord = styled(Record)`
+	cursor: pointer;
+`;
+export { StyledArrowDown, StyledArrowUp, Error, StyledRecord, Warning };

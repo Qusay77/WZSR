@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import rrwebPlayer from "rrweb-player";
 import "rrweb-player/dist/style.css";
-import { useFetchReplayFileQuery } from "src/services/record";
+// import { useFetchReplayFileQuery } from "src/services/record";
 import {
 	PlayerStateTypes,
 	resetPlayer,
@@ -12,14 +12,17 @@ import {
 import { PlayerMount } from "./Blocks";
 import usePlayerDimensions from "./usePlayerDimensions";
 import { events } from "./events";
+// import { EventsDetails } from "store/state/EventsDetails";
 const Player = () => {
 	const PlayerRef = useRef(null);
 	const dispatch = useDispatch();
 	const { PlayerInstance } = useSelector(
 		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
 	);
-	const { data } = useFetchReplayFileQuery("session1");
-
+	// const { replayUrl } = useSelector(
+	// 	({ EventsState }: { EventsState: EventsDetails }) => EventsState,
+	// );
+	// const { data } = useFetchReplayFileQuery(replayUrl);
 	useEffect(() => {
 		// dev fix for strict mode
 		const rr_player = Array.from(
@@ -27,7 +30,7 @@ const Player = () => {
 				"rr-player",
 			) as HTMLCollectionOf<HTMLElement>,
 		)[0];
-		if (PlayerRef.current && !PlayerInstance && !rr_player && data) {
+		if (PlayerRef.current && !PlayerInstance && !rr_player && events) {
 			const newPlayer = new rrwebPlayer({
 				target: PlayerRef.current,
 				props: {
@@ -47,7 +50,7 @@ const Player = () => {
 			dispatch(resetPlayer());
 			dispatch(setPlayer(null));
 		};
-	}, [PlayerRef, data]);
+	}, [PlayerRef, events]);
 	usePlayerDimensions(PlayerRef?.current);
 
 	return <PlayerMount ref={PlayerRef} />;

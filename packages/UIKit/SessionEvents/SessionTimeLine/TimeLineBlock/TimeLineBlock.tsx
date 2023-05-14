@@ -9,12 +9,20 @@ import {
 import { TimeLineBlockExpanded } from "./Blocks/TimeLineExpandedBlocks";
 import { TimeLineBlockInline } from "./Blocks/TimeLineInlineBlocks";
 import { GroupType } from "./types";
-
+import moment from "moment-timezone";
 const GroupItem = ({ groupItem }: { groupItem: GroupType }) => {
 	const [expanded, setExpand] = useState(false);
 
-	const { isError, name, type, duration, method, status, custom_data } =
-		groupItem;
+	const {
+		isError,
+		name,
+		type,
+		duration,
+		method,
+		status,
+		custom_data,
+		error_message,
+	} = groupItem;
 
 	return (
 		<TimeLineBlockContainer>
@@ -32,6 +40,8 @@ const GroupItem = ({ groupItem }: { groupItem: GroupType }) => {
 					status={status}
 					duration={duration}
 					custom_data={custom_data}
+					isError={isError}
+					errorMessage={error_message}
 				/>
 			) : null}
 		</TimeLineBlockContainer>
@@ -54,20 +64,28 @@ const TimeLineBlock = ({
 	event: {
 		duration: string;
 		name: string;
-		expandPageView: { data: Array<GroupType> };
+		expandPageView: {
+			entryTime: string;
+			data: Array<GroupType>;
+		};
 	};
 }) => {
 	const [expanded, setExpand] = useState(false);
 	const { name, duration, expandPageView } = event;
-	const { data } = expandPageView;
+	const { data, entryTime } = expandPageView;
 	const hasErrors = data.filter((e) => e.isError).map((e) => e.type);
 
-	const { errorsOnly } = useSelector(
+	const { errorsOnly, details } = useSelector(
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
 	const render = errorsOnly ? !hasErrors.length : false;
-	// console.log(event);
-	// goto
+	const format = "YYYY-MM-DD HH:mm:ss.SSS Z";
+	const entry = moment(entryTime, format);
+	const start = moment(details?.DATETIME, format);
+
+	const entryMS = entry.valueOf();
+	const startMS = start.valueOf();
+
 	return !render ? (
 		<TimeLineBlockContainer>
 			<TimeLineBlockInline
@@ -76,6 +94,7 @@ const TimeLineBlock = ({
 				setExpand={setExpand}
 				expanded={expanded}
 				hasErrors={hasErrors}
+				skipTo={entryMS - startMS}
 			/>
 			<TimeLineExpandedList expanded={expanded}>
 				{expanded ? <TimeLineGroup group={data} /> : null}

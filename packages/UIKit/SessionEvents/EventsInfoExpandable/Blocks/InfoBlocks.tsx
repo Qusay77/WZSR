@@ -29,12 +29,12 @@ const InfoMap = [
 		Component: BrowserBlock,
 	},
 	{
-		label: "User ID",
-		Component: UserIdBlock,
-	},
-	{
 		label: "Referrer",
 		Component: ReferrerBlock,
+	},
+	{
+		label: "User ID",
+		Component: UserIdBlock,
 	},
 ];
 

@@ -71,7 +71,39 @@ const MiniListBlock = styled.div`
 		color: var(--Text-Sub);
 	}
 `;
-
+const ExpandedErrorBlock = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0px;
+	gap: 8px;
+	width: 100%;
+	height: fit-content;
+	> p {
+		font-style: normal;
+		font-weight: 400;
+		font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
+		line-height: 17px;
+		color: var(--Text-Sub);
+	}
+`;
+const ExpandedTextBoard = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 16px;
+	isolation: isolate;
+	width: 100%;
+	height: fit-content;
+	background: #f8f8f8;
+	border-radius: 4px;
+	overflow-y: auto;
+	font-style: normal;
+	font-weight: 400;
+	font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
+	line-height: 17px;
+	color: var(--Text-Body);
+`;
 const MiniList = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -84,6 +116,7 @@ const MiniList = styled.div`
 	background: #f8f8f8;
 	border-radius: 4px;
 	overflow-y: auto;
+	font-size: 14px;
 `;
 const MiniListItem = styled.div`
 	border-bottom: 1px solid var(--Seperation);
@@ -108,11 +141,15 @@ const TimeLineBlockExpanded = ({
 	status,
 	duration,
 	custom_data,
+	isError,
+	errorMessage,
 }: {
 	duration?: string;
 	method?: string;
 	status?: number;
 	custom_data?: Array<{ definitionName: string; value: string }> | null;
+	isError?: boolean;
+	errorMessage: string;
 }) => {
 	const durationStr = duration ? duration?.split(".")[0] : "";
 	return (
@@ -131,6 +168,12 @@ const TimeLineBlockExpanded = ({
 					<p>{durationStr ?? "No Info"}</p>
 				</EssentialInfoBlock>
 			</EssentialInfoBlockRow>
+			{isError && errorMessage ? (
+				<ExpandedErrorBlock>
+					<p>Error Message</p>
+					<ExpandedTextBoard>{errorMessage}</ExpandedTextBoard>
+				</ExpandedErrorBlock>
+			) : null}
 			{custom_data ? (
 				<MiniListBlock>
 					<p>Custom Data</p>

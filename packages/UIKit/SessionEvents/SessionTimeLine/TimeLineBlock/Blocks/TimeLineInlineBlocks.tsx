@@ -1,7 +1,14 @@
 import styled from "@emotion/styled";
+import { usePlayer } from "packages/rrweb";
 import { Dispatch, SetStateAction } from "react";
 import { Truncate } from ".";
-import { Error, Record, StyledArrowDown, StyledArrowUp, Warning } from "../svg";
+import {
+	Error,
+	StyledRecord,
+	StyledArrowDown,
+	StyledArrowUp,
+	Warning,
+} from "../svg";
 
 const TimeLineBlockInlineContainer = styled.div<{ expanded: boolean }>`
 	display: flex;
@@ -123,6 +130,7 @@ const TimeLineBlockInline = ({
 	isError,
 	type,
 	hasErrors,
+	skipTo,
 }: {
 	expanded: boolean;
 	setExpand: Dispatch<SetStateAction<boolean>>;
@@ -131,6 +139,7 @@ const TimeLineBlockInline = ({
 	isError?: boolean;
 	type?: string;
 	hasErrors?: Array<string | undefined>;
+	skipTo?: number;
 }) => {
 	const onExpandClick = () => {
 		setExpand((prev) => !prev);
@@ -142,10 +151,17 @@ const TimeLineBlockInline = ({
 	const hasOtherErrors =
 		hasErrors?.find((e) => e !== "js_error") ||
 		(isError && type !== "js_error");
+	const { PlayerInstance, play } = usePlayer(true);
 	return (
 		<TimeLineBlockInlineContainer expanded={expanded}>
 			<TypeBlock>
-				<Record />
+				<StyledRecord
+					onClick={() => {
+						if (skipTo) {
+							PlayerInstance?.goto(skipTo, play);
+						}
+					}}
+				/>
 				<Truncate>{name}</Truncate>
 			</TypeBlock>
 			<InfoBlock>

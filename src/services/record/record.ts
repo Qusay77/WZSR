@@ -3,7 +3,7 @@ import Pako from "pako";
 
 const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	const reader = stream?.getReader();
-	const inflater = new Pako.Inflate();
+	const inflater = new Pako.Inflate({ chunkSize: 1024 * 1024 });
 
 	while (reader) {
 		const { done, value } = (await reader.read()) || {};
@@ -20,11 +20,12 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	if (inflater.err) {
 		throw new Error(`Inflate error: ${inflater.msg}`);
 	}
+
 	const deflatedResult = inflater.result;
+
 	const deflatedString = new TextDecoder().decode(
 		deflatedResult as BufferSource,
 	);
-
 	return deflatedString;
 };
 
@@ -35,9 +36,10 @@ const customBaseQuery: BaseQueryFn = async (args) => {
 		if (!response.ok) {
 			throw new Error(`Request failed with status ${response.status}`);
 		}
-		const str = await processStream(response.body);
-		const output = JSON.parse(`[${str.slice(0, -1)}]`);
 
+		const str = await processStream(response.body);
+
+		const output = JSON.parse(`[${str.slice(0, -1)}]`);
 		return {
 			data: JSON.stringify(output),
 			status: response.status,
@@ -62,7 +64,7 @@ const api = createApi({
 	baseQuery: customBaseQuery,
 	endpoints: (builder) => ({
 		fetchReplayFile: builder.query({
-			query: (id) => `${import.meta.env.VITE_APP_REPLAY_KEY}public/${id}.wz`,
+			query: (url) => url,
 		}),
 	}),
 });
