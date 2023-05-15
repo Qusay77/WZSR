@@ -3,7 +3,7 @@ import Pako from "pako";
 
 const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	const reader = stream?.getReader();
-	const inflater = new Pako.Inflate({ chunkSize: 65536 });
+	const inflater = new Pako.Inflate({ chunkSize: 1024 * 1024 });
 
 	while (reader) {
 		const { done, value } = (await reader.read()) || {};
@@ -18,6 +18,8 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	}
 
 	if (inflater.err) {
+		// eslint-disable-next-line no-console
+		console.log(inflater);
 		throw new Error(`Inflate error: ${inflater.msg}`);
 	}
 
@@ -26,7 +28,6 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	const deflatedString = new TextDecoder().decode(
 		deflatedResult as BufferSource,
 	);
-
 	return deflatedString;
 };
 
