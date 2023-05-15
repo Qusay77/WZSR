@@ -34,7 +34,7 @@ const Player = () => {
 			const newPlayer = new rrwebPlayer({
 				target: PlayerRef.current,
 				props: {
-					events: JSON.parse(`${data}`),
+					events: JSON.parse(`${data?.replace(/\]\[/g, ",")}`),
 					showController: false,
 					autoPlay: false,
 					useVirtualDom: true,
