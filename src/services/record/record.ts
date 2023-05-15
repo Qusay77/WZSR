@@ -28,6 +28,8 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	const deflatedString = new TextDecoder().decode(
 		deflatedResult as BufferSource,
 	);
+	// eslint-disable-next-line no-console
+	console.log(deflatedString);
 	return deflatedString;
 };
 
