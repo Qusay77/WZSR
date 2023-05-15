@@ -152,6 +152,7 @@ const TimeLineBlockInline = ({
 		hasErrors?.find((e) => e !== "js_error") ||
 		(isError && type !== "js_error");
 	const { PlayerInstance, play } = usePlayer(true);
+
 	return (
 		<TimeLineBlockInlineContainer expanded={expanded}>
 			<TypeBlock>
