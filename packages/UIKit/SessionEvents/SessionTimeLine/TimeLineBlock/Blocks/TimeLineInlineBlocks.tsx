@@ -159,6 +159,8 @@ const TimeLineBlockInline = ({
 				<StyledRecord
 					onClick={() => {
 						if (skipTo) {
+							// eslint-disable-next-line no-console
+							console.log(skipTo);
 							PlayerInstance?.goto(skipTo, play);
 						}
 					}}
