@@ -130,7 +130,7 @@ const TimeLineBlockInline = ({
 	isError,
 	type,
 	hasErrors,
-	skipTo,
+	skipTo = 1,
 }: {
 	expanded: boolean;
 	setExpand: Dispatch<SetStateAction<boolean>>;
@@ -160,7 +160,7 @@ const TimeLineBlockInline = ({
 					onClick={() => {
 						// eslint-disable-next-line no-console
 						console.log(skipTo);
-						if (skipTo) {
+						if (Number.isInteger(skipTo)) {
 							PlayerInstance?.goto(skipTo, play);
 						}
 					}}
