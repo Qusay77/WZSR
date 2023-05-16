@@ -31,29 +31,22 @@ const Player = () => {
 			) as HTMLCollectionOf<HTMLElement>,
 		)[0];
 		if (PlayerRef.current && !PlayerInstance && !rr_player && data) {
-			let newPlayer = null;
-			try {
-				newPlayer = new rrwebPlayer({
-					target: PlayerRef.current,
-					props: {
-						// events: JSON.parse(`[${data?.replace(/\]\[/g, ",").slice(0, -1)}]`),
-						events: [],
-						showController: false,
-						autoPlay: false,
-						useVirtualDom: true,
-						skipInactive: false,
-					},
-				});
-			} catch (e) {
-				// eslint-disable-next-line no-console
-				console.log(e);
-			}
-			if (newPlayer) {
-				const meta = newPlayer.getMetaData();
-				dispatch(setMetaData(meta));
-			}
+			const newPlayer = new rrwebPlayer({
+				target: PlayerRef.current,
+				props: {
+					events: JSON.parse(`[${data?.replace(/\]\[/g, ",").slice(0, -1)}]`),
+					// events: [],
+					showController: false,
+					autoPlay: false,
+					useVirtualDom: true,
+					skipInactive: false,
+				},
+			});
+			const meta = newPlayer.getMetaData();
+			dispatch(setMetaData(meta));
 			dispatch(setPlayer(newPlayer));
 		}
+
 		return () => {
 			dispatch(resetPlayer());
 			dispatch(setPlayer(null));
