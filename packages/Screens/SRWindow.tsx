@@ -7,6 +7,7 @@ import Loader from "packages/UIKit/Loader";
 import { useSelector } from "react-redux";
 import { EventsDetails } from "store/state/EventsDetails";
 import { useFetchSessionDetailsQuery } from "src/services/details";
+import { PlayerStateTypes } from "store/state/PlayerStore";
 const SRWindow = () => {
 	const handle = useFullScreenHandle();
 	useEffect(() => {
@@ -23,14 +24,33 @@ const SRWindow = () => {
 		sessionId: 15781901128595206000,
 		// sessionId: 15781901128595206000,
 	});
+	const { PlayerInstance } = useSelector(
+		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
+	);
 	return (
 		<FullScreen handle={handle}>
 			<SRScreen>
 				<SRScreenWrapper>
 					{ready ? (
-						<PlayerBlock
-							enterFullScreen={handle.active ? handle.exit : handle.enter}
-						/>
+						PlayerInstance ? (
+							<PlayerBlock
+								enterFullScreen={handle.active ? handle.exit : handle.enter}
+							/>
+						) : (
+							<div
+								style={{
+									backgroundColor: "white",
+									width: "100%",
+									height: "100%",
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
+							>
+								Player &nbsp; <p style={{ color: "red" }}>Error</p> &nbsp; Check
+								console
+							</div>
+						)
 					) : null}
 					{handle.active || !ready ? null : <SessionEvents />}
 					{ready ? null : <Loader />}
