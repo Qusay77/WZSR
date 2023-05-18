@@ -31,24 +31,17 @@ const SessionRecording = ({
 	const entries = urlParams.entries();
 	const queryParams = paramsToObject(entries);
 
-	const { sessionId, orgId, sessionDate } = queryParams;
+	const { sessionId } = queryParams;
 	const sessionIdProps = container.attributes.getNamedItem("sessionId")?.value;
-	const orgIdProp = container.attributes.getNamedItem("orgId")?.value;
-	const sessionDateValue =
-		container.attributes.getNamedItem("sessionDate")?.value;
 
-	console.log(sessionId, orgId, sessionDate, "params");
-	console.log(sessionIdProps, orgIdProp, sessionDateValue, "props");
+	console.log(sessionId, "params");
+	console.log(sessionIdProps, "props");
 
 	return (
 		<Provider store={store}>
 			<Global styles={GlobalStyles} />
 			<ThemeProvider theme={theme}>
-				<SRWindow
-					sessionId={sessionId ?? sessionIdProps}
-					orgId={orgId ?? orgIdProp}
-					sessionDate={sessionDate ?? sessionDateValue}
-				/>
+				<SRWindow sessionId={sessionId ?? sessionIdProps} />
 			</ThemeProvider>
 		</Provider>
 	);

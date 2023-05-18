@@ -49,12 +49,12 @@ const StyledTooltip = styled(Tooltip)`
 `;
 const SessionTimeBlock = ({ value }: ValueType) => {
 	const dateTime = value?.split(" ");
-	const time = dateTime[1].split(".")?.[0];
+	const time = dateTime[1]?.split(".")?.[0];
 	return (
 		<div>
 			<Calendar />
 			<span>
-				{dateTime[0]} <TextSeparator /> {time}
+				{dateTime[0] ?? ""} <TextSeparator /> {time}
 			</span>
 		</div>
 	);
@@ -64,8 +64,8 @@ const DeviceBlock = ({ value }: ValueType) => {
 	const Icon = Devices[value as keyof DevicesTypes];
 	return (
 		<div>
-			<Icon />
-			<span>{value}</span>
+			{value ? <Icon /> : null}
+			<span>{value ?? ""}</span>
 		</div>
 	);
 };
@@ -77,17 +77,17 @@ const LocationBlock = ({ value }: ValueType) => {
 				height={20}
 				countryCode={countries[value]?.toLocaleLowerCase()}
 			/>
-			<span>{value}</span>
+			<span>{value ?? ""}</span>
 		</div>
 	);
 };
 const BrowserBlock = ({ value }: { value: BrowserType }) => {
-	const { USERBROWSER, USERBROWSERVERSION } = value;
+	const { userBrowser, userBrowserVersion } = value;
 	return (
 		<div>
 			<Chrome />
 			<span>
-				{USERBROWSER} {USERBROWSERVERSION}
+				{userBrowser ?? ""} {userBrowserVersion ?? ""}
 			</span>
 		</div>
 	);
@@ -97,7 +97,7 @@ const UserIdBlock = ({ value }: ValueType) => {
 	const { details } = useSelector(
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
-	const SALink = GenerateSessionAnalyticsURl(details?.USERID || "");
+	const SALink = GenerateSessionAnalyticsURl(details?.userId || "");
 	const url = `https://portal.webeyez.com/sessions/analytic?${SALink}`;
 	return (
 		<div>
@@ -106,9 +106,10 @@ const UserIdBlock = ({ value }: ValueType) => {
 				View <p>n</p> User sessions over the <p>last 30 days</p>
 			</StyledTooltip>
 
-			<StyledTooltip id="#userId">{value}</StyledTooltip>
+			<StyledTooltip id="#userId">{value ?? ""}</StyledTooltip>
 			<span>
-				<Truncate data-tooltip-id="#userId">{value}</Truncate> <TextSeparator />
+				<Truncate data-tooltip-id="#userId">{value ?? ""}</Truncate>
+				<TextSeparator />
 				<StyledCopy
 					data-tooltip-id="#userIdCopy"
 					onClick={() => {
@@ -134,10 +135,10 @@ const ReferrerBlock = ({ value }: ValueType) => {
 				{copied && "Copied"}
 			</StyledTooltip>
 			<StyledTooltip id="#referrer" clickable>
-				{value}
+				{value ?? ""}
 			</StyledTooltip>
 			<span>
-				<Truncate data-tooltip-id="#referrer">{value}</Truncate>
+				<Truncate data-tooltip-id="#referrer">{value ?? ""}</Truncate>
 				<StyledCopy
 					data-tooltip-id="#referrerText"
 					onClick={() => {

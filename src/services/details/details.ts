@@ -8,10 +8,8 @@ const api = createApi({
 	endpoints: (builder) => ({
 		fetchSessionDetails: builder.query({
 			query: (params) => {
-				const { orgId, sessionId, sessionDate } = params || {};
-				return `${
-					import.meta.env.VITE_APP_API_KEY
-				}sr/v2/sessions/${orgId}/${sessionId}?sessionDate=${sessionDate}`;
+				const { sessionId } = params || {};
+				return `${import.meta.env.VITE_APP_API_KEY}sr/v2/sessions/${sessionId}`;
 			},
 		}),
 	}),

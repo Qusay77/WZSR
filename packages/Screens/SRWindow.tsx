@@ -8,15 +8,7 @@ import { useSelector } from "react-redux";
 import { EventsDetails } from "store/state/EventsDetails";
 import { useFetchSessionDetailsQuery } from "src/services/details";
 import { ErrorBoundary } from "react-error-boundary";
-const SRWindow = ({
-	sessionId,
-	orgId,
-	sessionDate,
-}: {
-	sessionId?: string;
-	orgId?: string;
-	sessionDate?: string;
-}) => {
+const SRWindow = ({ sessionId }: { sessionId?: string }) => {
 	const handle = useFullScreenHandle();
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
@@ -29,11 +21,7 @@ const SRWindow = ({
 	);
 
 	useFetchSessionDetailsQuery({
-		// orgId: orgId ?? 645,
-		// sessionId: sessionId ?? 15781901128595206000,
-		orgId: orgId,
 		sessionId: sessionId,
-		sessionDate,
 	});
 	return (
 		<FullScreen handle={handle}>

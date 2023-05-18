@@ -10,13 +10,13 @@ interface EventsDetails {
 		expandPageView: { entryTime: string; data: Array<GroupType> };
 	}>;
 	details: {
-		COUNTRY: string;
-		DATETIME: string;
-		DEVICE: string;
-		REFERRERPATH: string;
-		USERBROWSER: string;
-		USERID: string;
-		USERBROWSERVERSION: string;
+		country: string;
+		dateTime: string;
+		device: string;
+		referrerPath: string;
+		userBrowser: string;
+		userId: string;
+		userBrowserVersion: string;
 	} | null;
 	replayUrl: string | null;
 	errorsOnly: boolean;
