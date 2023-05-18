@@ -13,8 +13,8 @@ const SRWindow = ({
 	orgId,
 	sessionDate,
 }: {
-	sessionId?: number;
-	orgId?: number;
+	sessionId?: string;
+	orgId?: string;
 	sessionDate?: string;
 }) => {
 	const handle = useFullScreenHandle();

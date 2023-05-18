@@ -32,27 +32,21 @@ const SessionRecording = ({
 	const queryParams = paramsToObject(entries);
 
 	const { sessionId, orgId, sessionDate } = queryParams;
-	const sessionIdValue = container.attributes.getNamedItem("sessionId")?.value;
-	const orgIdValue = container.attributes.getNamedItem("orgId")?.value;
+	const sessionIdProps = container.attributes.getNamedItem("sessionId")?.value;
+	const orgIdProp = container.attributes.getNamedItem("orgId")?.value;
 	const sessionDateValue =
 		container.attributes.getNamedItem("sessionDate")?.value;
-	const sessionIdProps = sessionIdValue
-		? parseInt(sessionIdValue, 10)
-		: undefined;
-	const orgIdProp = orgIdValue ? parseInt(orgIdValue, 10) : undefined;
-	console.log(sessionId, orgId, sessionDate, "params");
-	console.log(sessionIdProps, orgIdValue, sessionDateValue, "props");
 
-	const parsedSessionId = sessionId ? parseInt(sessionId, 10) : undefined;
-	const parsedOrgId = orgId ? parseInt(orgId, 10) : undefined;
+	console.log(sessionId, orgId, sessionDate, "params");
+	console.log(sessionIdProps, orgIdProp, sessionDateValue, "props");
 
 	return (
 		<Provider store={store}>
 			<Global styles={GlobalStyles} />
 			<ThemeProvider theme={theme}>
 				<SRWindow
-					sessionId={parsedSessionId ?? sessionIdProps}
-					orgId={parsedOrgId ?? orgIdProp}
+					sessionId={sessionId ?? sessionIdProps}
+					orgId={orgId ?? orgIdProp}
 					sessionDate={sessionDate ?? sessionDateValue}
 				/>
 			</ThemeProvider>
