@@ -27,7 +27,7 @@ const SRWindow = ({
 	const { ready } = useSelector(
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
-	// eslint-disable-next-line no-console
+
 	useFetchSessionDetailsQuery({
 		// orgId: orgId ?? 645,
 		// sessionId: sessionId ?? 15781901128595206000,
@@ -35,7 +35,6 @@ const SRWindow = ({
 		sessionId: sessionId,
 		sessionDate,
 	});
-
 	return (
 		<FullScreen handle={handle}>
 			<SRScreen>

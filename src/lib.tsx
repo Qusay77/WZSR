@@ -4,7 +4,6 @@ import { store } from "store";
 import { Provider } from "react-redux";
 import { GlobalStyles, theme } from "./Globals/global";
 import SRWindow from "packages/Screens/SRWindow";
-import { useEffect, useState } from "react";
 type ParamsType = {
 	sessionId?: string;
 	orgId?: string;
@@ -28,19 +27,11 @@ const SessionRecording = ({
 }: {
 	container: { attributes: NamedNodeMap };
 }) => {
-	const [queryParams, setQueryParams] = useState<ParamsType>({
-		sessionId: undefined,
-		orgId: undefined,
-		sessionDate: undefined,
-	});
-	useEffect(() => {
-		const urlParams = new URLSearchParams(window.location.search);
-		const entries = urlParams.entries();
-		const params = paramsToObject(entries);
-		setQueryParams(params);
-	}, []);
+	const urlParams = new URLSearchParams(window.location.search);
+	const entries = urlParams.entries();
+	const queryParams = paramsToObject(entries);
+
 	const { sessionId, orgId, sessionDate } = queryParams;
-	console.log(queryParams, "xxxxxxxx");
 	const sessionIdValue = container.attributes.getNamedItem("sessionId")?.value;
 	const orgIdValue = container.attributes.getNamedItem("orgId")?.value;
 	const sessionDateValue =
@@ -54,6 +45,7 @@ const SessionRecording = ({
 
 	const parsedSessionId = sessionId ? parseInt(sessionId, 10) : undefined;
 	const parsedOrgId = orgId ? parseInt(orgId, 10) : undefined;
+
 	return (
 		<Provider store={store}>
 			<Global styles={GlobalStyles} />
