@@ -9,7 +9,7 @@ if (rootElement) {
 	root.render(
 		<StrictMode>
 			{/* <SessionRecording /> */}
-			<wz-sr sessionId="2" orgId="22"></wz-sr>
+			<wz-sr></wz-sr>
 		</StrictMode>,
 	);
 }
