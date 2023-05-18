@@ -11,9 +11,11 @@ import { ErrorBoundary } from "react-error-boundary";
 const SRWindow = ({
 	sessionId,
 	orgId,
+	sessionDate,
 }: {
-	sessionId: number;
-	orgId: number;
+	sessionId?: number;
+	orgId?: number;
+	sessionDate?: string;
 }) => {
 	const handle = useFullScreenHandle();
 	useEffect(() => {
@@ -26,10 +28,10 @@ const SRWindow = ({
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
 	// eslint-disable-next-line no-console
-	console.log(sessionId, orgId);
 	useFetchSessionDetailsQuery({
 		orgId: orgId ?? 645,
 		sessionId: sessionId ?? 15781901128595206000,
+		sessionDate,
 	});
 
 	return (

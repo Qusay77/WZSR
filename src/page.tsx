@@ -9,7 +9,11 @@ if (rootElement) {
 	root.render(
 		<StrictMode>
 			{/* <SessionRecording /> */}
-			<wz-sr></wz-sr>
+			<wz-sr
+				sessionId={15781901128595206000}
+				orgId={645}
+				sessionDate={"2023-04-01 00:00:00"}
+			></wz-sr>
 		</StrictMode>,
 	);
 }
