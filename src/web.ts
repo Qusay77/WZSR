@@ -9,8 +9,8 @@ const SessionRecordingWeb = reactToWebComponent(
 	ReactDOM,
 	{
 		props: {
-			sessionId: "number",
-			orgId: "number",
+			sessionId: Number,
+			orgId: Number,
 		},
 	},
 );
