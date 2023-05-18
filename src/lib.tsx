@@ -4,12 +4,18 @@ import { Provider } from "react-redux";
 import { GlobalStyles, theme } from "./Globals/global";
 import SRWindow from "packages/Screens/SRWindow";
 
-const SessionRecording = () => {
+const SessionRecording = ({
+	sessionId,
+	orgId,
+}: {
+	sessionId: number;
+	orgId: number;
+}) => {
 	return (
 		<Provider store={store}>
 			<Global styles={GlobalStyles} />
 			<ThemeProvider theme={theme}>
-				<SRWindow />
+				<SRWindow sessionId={sessionId} orgId={orgId} />
 			</ThemeProvider>
 		</Provider>
 	);
