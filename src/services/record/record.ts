@@ -1,36 +1,27 @@
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
-import Pako from "pako";
 
 const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	const reader = stream?.getReader();
-	const inflater = new Pako.Inflate({ chunkSize: 1024 * 1024 });
-
+	let res = "";
+	let json: Array<{ [key: string]: string }> = [];
+	const decoder = new TextDecoder("utf-8");
 	while (reader) {
 		const { done, value } = (await reader.read()) || {};
 
 		if (done) {
+			json = JSON.parse(res.replace(/\]\[/g, ","));
+			// eslint-disable-next-line no-console
+			console.log(json);
 			break;
 		}
 
 		if (value && value instanceof Uint8Array) {
-			inflater.push(value);
+			const chunk = decoder.decode(value, { stream: true });
+			res += chunk;
 		}
 	}
 
-	if (inflater.err) {
-		// eslint-disable-next-line no-console
-		console.log(inflater);
-		throw new Error(`Inflate error: ${inflater.msg}`);
-	}
-
-	const deflatedResult = inflater.result;
-
-	const deflatedString = new TextDecoder().decode(
-		deflatedResult as BufferSource,
-	);
-	// eslint-disable-next-line no-console
-	console.log(deflatedString);
-	return deflatedString;
+	return json;
 };
 
 const customBaseQuery: BaseQueryFn = async (args) => {

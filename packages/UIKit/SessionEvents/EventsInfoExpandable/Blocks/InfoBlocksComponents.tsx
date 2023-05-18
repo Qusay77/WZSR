@@ -94,27 +94,25 @@ const BrowserBlock = ({ value }: { value: BrowserType }) => {
 };
 
 const UserIdBlock = ({ value }: ValueType) => {
-	const [copied, setCopied] = useState(false);
-	const handleClick = () => {
-		setCopied(true);
-		setTimeout(() => setCopied(false), 2000);
-	};
+	const { details } = useSelector(
+		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
+	);
+	const SALink = GenerateSessionAnalyticsURl(details?.USERID || "");
+	const url = `https://portal.webeyez.com/sessions/analytic?${SALink}`;
 	return (
 		<div>
 			<User />
-			<StyledTooltip isOpen={copied} id="#userIdCopy">
-				{copied && "Copied"}
+			<StyledTooltip id="#userIdCopy">
+				View <p>n</p> User sessions over the <p>last 30 days</p>
 			</StyledTooltip>
-			<StyledTooltip clickable id="#userId">
-				{value}
-			</StyledTooltip>
+
+			<StyledTooltip id="#userId">{value}</StyledTooltip>
 			<span>
 				<Truncate data-tooltip-id="#userId">{value}</Truncate> <TextSeparator />
 				<StyledCopy
 					data-tooltip-id="#userIdCopy"
 					onClick={() => {
-						handleClick();
-						copyToClipboard(value);
+						window.open(url, "_blank");
 					}}
 				/>
 			</span>
@@ -123,16 +121,17 @@ const UserIdBlock = ({ value }: ValueType) => {
 };
 
 const ReferrerBlock = ({ value }: ValueType) => {
-	const { details } = useSelector(
-		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
-	);
-	const SALink = GenerateSessionAnalyticsURl(details?.USERID || "");
-	const url = `https://portal.webeyez.com/sessions/analytic?${SALink}`;
+	const [copied, setCopied] = useState(false);
+	const handleClick = () => {
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000);
+	};
 	return (
 		<div>
 			<Referrer />
-			<StyledTooltip id="#referrerText">
-				View <p>n</p> User sessions over the <p>last 30 days</p>
+
+			<StyledTooltip isOpen={copied} id="#referrerText">
+				{copied && "Copied"}
 			</StyledTooltip>
 			<StyledTooltip id="#referrer" clickable>
 				{value}
@@ -142,7 +141,8 @@ const ReferrerBlock = ({ value }: ValueType) => {
 				<StyledCopy
 					data-tooltip-id="#referrerText"
 					onClick={() => {
-						window.open(url, "_blank");
+						handleClick();
+						copyToClipboard(value);
 					}}
 				/>
 			</span>
