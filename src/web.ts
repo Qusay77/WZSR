@@ -7,6 +7,12 @@ const SessionRecordingWeb = reactToWebComponent(
 	SessionRecording,
 	React,
 	ReactDOM,
+	{
+		props: {
+			sessionId: "number",
+			orgId: "number",
+		},
+	},
 );
 
 export default SessionRecordingWeb;
