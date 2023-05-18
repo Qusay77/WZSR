@@ -40,7 +40,7 @@ const SessionRecording = ({
 		setQueryParams(params);
 	}, []);
 	const { sessionId, orgId, sessionDate } = queryParams;
-
+	console.log(queryParams, "xxxxxxxx");
 	const sessionIdValue = container.attributes.getNamedItem("sessionId")?.value;
 	const orgIdValue = container.attributes.getNamedItem("orgId")?.value;
 	const sessionDateValue =

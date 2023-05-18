@@ -29,8 +29,10 @@ const SRWindow = ({
 	);
 	// eslint-disable-next-line no-console
 	useFetchSessionDetailsQuery({
-		orgId: orgId ?? 645,
-		sessionId: sessionId ?? 15781901128595206000,
+		// orgId: orgId ?? 645,
+		// sessionId: sessionId ?? 15781901128595206000,
+		orgId: orgId,
+		sessionId: sessionId,
 		sessionDate,
 	});
 

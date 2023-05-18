@@ -10,9 +10,9 @@ if (rootElement) {
 		<StrictMode>
 			{/* <SessionRecording /> */}
 			<wz-sr
-				sessionId={15781901128595206000}
-				orgId={645}
-				sessionDate={"2023-04-01 00:00:00"}
+			// sessionId={15781901128595206000}
+			// orgId={645}
+			// sessionDate={"2023-04-01 00:00:00"}
 			></wz-sr>
 		</StrictMode>,
 	);
