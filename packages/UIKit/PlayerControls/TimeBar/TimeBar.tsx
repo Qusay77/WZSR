@@ -1,4 +1,5 @@
 import { usePlayer } from "packages/rrweb";
+import { isMacSafariOrChrome } from "packages/utils/tools";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { TimeRangeInput } from "./Blocks";
 
@@ -11,10 +12,15 @@ const TimeBar = () => {
 
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = parseInt(e.target.value, 10);
-		if (!isMouseDown) {
+		if (isMacSafariOrChrome()) {
 			PlayerInstance?.goto(value, play);
-		} else {
 			setCloneState(value);
+		} else {
+			if (!isMouseDown) {
+				PlayerInstance?.goto(value, play);
+			} else {
+				setCloneState(value);
+			}
 		}
 	};
 

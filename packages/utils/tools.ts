@@ -59,5 +59,13 @@ const mobileShare = () => {
 			.catch((error) => console.log("Error sharing:", error));
 	}
 };
+const isMacSafariOrChrome = () => {
+	const userAgent = window.navigator.userAgent.toLowerCase();
+	const isMac = /mac/.test(navigator.platform.toLowerCase());
+	const isSafari =
+		userAgent.includes("safari") && !userAgent.includes("chrome");
+	const isChrome = userAgent.includes("chrome");
 
-export { isOverflown, copyToClipboard, mobileShare };
+	return isMac && (isSafari || isChrome);
+};
+export { isOverflown, copyToClipboard, mobileShare, isMacSafariOrChrome };
