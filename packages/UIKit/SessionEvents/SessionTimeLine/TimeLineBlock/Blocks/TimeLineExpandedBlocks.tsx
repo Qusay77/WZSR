@@ -62,7 +62,7 @@ const MiniListBlock = styled.div`
 	padding: 0px;
 	gap: 8px;
 	width: 100%;
-	height: 147px;
+	max-height: 147px;
 	> p {
 		font-style: normal;
 		font-weight: 400;
@@ -152,6 +152,10 @@ const TimeLineBlockExpanded = ({
 	errorMessage: string;
 }) => {
 	const durationStr = duration ? duration?.split(".")[0] : "";
+	let CustomData = custom_data;
+	if (typeof custom_data === "string") {
+		CustomData = JSON.parse(custom_data);
+	}
 	return (
 		<TimeLineBlockExpandedContainer>
 			<EssentialInfoBlockRow>
@@ -174,11 +178,11 @@ const TimeLineBlockExpanded = ({
 					<ExpandedTextBoard>{errorMessage}</ExpandedTextBoard>
 				</ExpandedErrorBlock>
 			) : null}
-			{custom_data ? (
+			{CustomData ? (
 				<MiniListBlock>
 					<p>Custom Data</p>
 					<MiniList>
-						{custom_data.map(({ definitionName, value }, i) => (
+						{CustomData.map(({ definitionName, value }, i) => (
 							<MiniListItem key={`${i}-mini-list`}>
 								<p>{definitionName}:</p>
 								<p>{value}</p>

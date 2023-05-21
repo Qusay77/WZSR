@@ -22,7 +22,7 @@ const TimeBar = () => {
 		setIsMouseDown(true);
 		setCloneState(timer);
 
-		document.addEventListener(
+		window.addEventListener(
 			"mouseup",
 			() => {
 				setCloneState(timer);

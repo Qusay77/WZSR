@@ -24,24 +24,27 @@ function paramsToObject(
 
 const SessionRecording = ({
 	container,
+	sessionId,
 }: {
-	container: { attributes: NamedNodeMap };
+	container?: { attributes: NamedNodeMap };
+	sessionId?: string;
 }) => {
 	const urlParams = new URLSearchParams(window.location.search);
 	const entries = urlParams.entries();
 	const queryParams = paramsToObject(entries);
 
-	const { sessionId } = queryParams;
-	const sessionIdProps = container.attributes.getNamedItem("sessionId")?.value;
+	const { sessionId: sessionIdParam } = queryParams;
+	const sessionIdProps =
+		sessionId ?? container?.attributes?.getNamedItem("sessionId")?.value;
 
-	console.log(sessionId, "params");
+	console.log(sessionIdParam, "params");
 	console.log(sessionIdProps, "props");
 
 	return (
 		<Provider store={store}>
 			<Global styles={GlobalStyles} />
 			<ThemeProvider theme={theme}>
-				<SRWindow sessionId={sessionId ?? sessionIdProps} />
+				<SRWindow sessionId={sessionIdParam ?? sessionIdProps} />
 			</ThemeProvider>
 		</Provider>
 	);

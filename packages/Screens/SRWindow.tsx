@@ -19,7 +19,22 @@ const SRWindow = ({ sessionId }: { sessionId?: string }) => {
 	const { ready } = useSelector(
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
-
+	if (!sessionId) {
+		return (
+			<div
+				style={{
+					backgroundColor: "white",
+					width: "100%",
+					height: "100vh",
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+			>
+				Session ID is &nbsp; <p style={{ color: "red" }}>Missing</p>
+			</div>
+		);
+	}
 	useFetchSessionDetailsQuery({
 		sessionId: sessionId,
 	});
