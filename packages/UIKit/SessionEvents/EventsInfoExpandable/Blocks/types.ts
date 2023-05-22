@@ -18,6 +18,7 @@ interface DevicesTypes {
 	Mobile: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 	Desktop: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 	Tablet: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+	Phone: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
 interface BrowsersTypes {
 	Chrome: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;

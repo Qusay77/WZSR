@@ -27,6 +27,7 @@ const Devices: DevicesTypes = {
 	Mobile,
 	Desktop,
 	Tablet,
+	Phone: Mobile,
 };
 const Browsers: BrowsersTypes = {
 	Chrome,
@@ -87,6 +88,7 @@ const SessionTimeBlock = ({ value }: ValueType) => {
 
 const DeviceBlock = ({ value }: ValueType) => {
 	const Icon = Devices[value as keyof DevicesTypes];
+
 	return (
 		<div>
 			{value ? (
