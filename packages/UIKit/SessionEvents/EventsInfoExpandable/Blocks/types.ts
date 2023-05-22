@@ -19,9 +19,21 @@ interface DevicesTypes {
 	Desktop: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 	Tablet: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
+interface BrowsersTypes {
+	Chrome: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+	Firefox: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+	Safari: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+}
 type ComponentProps = {
 	BrowserType: BrowserType;
 	ValueType: ValueType;
 };
 
-export type { BrowserType, MatchType, DevicesTypes, ComponentProps, ValueType };
+export type {
+	BrowsersTypes,
+	BrowserType,
+	MatchType,
+	DevicesTypes,
+	ComponentProps,
+	ValueType,
+};

@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import rrwebPlayer from "rrweb-player";
 import "rrweb-player/dist/style.css";
-import { useFetchReplayFileQuery } from "src/services/record";
 import {
 	PlayerStateTypes,
 	resetPlayer,
@@ -11,18 +10,14 @@ import {
 } from "store/state/PlayerStore";
 import { PlayerMount } from "./Blocks";
 import usePlayerDimensions from "./usePlayerDimensions";
-import { EventsDetails } from "store/state/EventsDetails";
 
 const Player = () => {
 	const PlayerRef = useRef(null);
 	const dispatch = useDispatch();
-	const { PlayerInstance } = useSelector(
+	const { PlayerInstance, data } = useSelector(
 		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
 	);
-	const { replayUrl } = useSelector(
-		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
-	);
-	const { data } = useFetchReplayFileQuery(replayUrl);
+
 	useEffect(() => {
 		// dev fix for strict mode
 		const rr_player = Array.from(

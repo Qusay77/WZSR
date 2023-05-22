@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { EventsDetails } from "store/state/EventsDetails";
 import { useFetchSessionDetailsQuery } from "src/services/details";
 import { ErrorBoundary } from "react-error-boundary";
+import { PlayerStateTypes } from "store/state/PlayerStore";
+import { useLazyFetchReplayFileQuery } from "src/services/record/record";
 const SRWindow = ({ sessionId }: { sessionId?: string }) => {
 	const handle = useFullScreenHandle();
 	useEffect(() => {
@@ -16,8 +18,8 @@ const SRWindow = ({ sessionId }: { sessionId?: string }) => {
 		}, 100);
 		return () => clearTimeout(timeoutId);
 	}, [handle.active]);
-	const { ready } = useSelector(
-		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
+	const { data } = useSelector(
+		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
 	);
 	if (!sessionId) {
 		return (
@@ -38,12 +40,42 @@ const SRWindow = ({ sessionId }: { sessionId?: string }) => {
 	useFetchSessionDetailsQuery({
 		sessionId: sessionId,
 	});
+	const { replayUrl } = useSelector(
+		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
+	);
+	const [fetchReplayFile, { isError }] = useLazyFetchReplayFileQuery();
+	useEffect(() => {
+		if (replayUrl) {
+			fetchReplayFile(replayUrl);
+		}
+	}, [replayUrl]);
+
+	if (isError) {
+		return (
+			<div
+				style={{
+					backgroundColor: "white",
+					width: "100%",
+					height: "100vh",
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+			>
+				Replay File &nbsp; <p style={{ color: "red" }}>Missing</p>
+			</div>
+		);
+	}
 	return (
 		<FullScreen handle={handle}>
 			<SRScreen>
 				<SRScreenWrapper>
-					{ready ? (
+					{data ? (
 						<ErrorBoundary
+							onError={(error, componentStack) => {
+								// eslint-disable-next-line no-console
+								console.log(error, componentStack);
+							}}
 							fallback={
 								<div
 									style={{
@@ -66,8 +98,8 @@ const SRWindow = ({ sessionId }: { sessionId?: string }) => {
 						</ErrorBoundary>
 					) : null}
 
-					{handle.active || !ready ? null : <SessionEvents />}
-					{ready ? null : <Loader />}
+					{handle.active || !data ? null : <SessionEvents />}
+					{data ? null : <Loader />}
 				</SRScreenWrapper>
 			</SRScreen>
 		</FullScreen>

@@ -1,4 +1,4 @@
-import { useFetchReplayFileQuery } from "./record";
+import { useFetchReplayFileQuery, useLazyFetchReplayFileQuery } from "./record";
 import RecordApi from "./record";
-export { useFetchReplayFileQuery };
+export { useFetchReplayFileQuery, useLazyFetchReplayFileQuery };
 export default RecordApi;

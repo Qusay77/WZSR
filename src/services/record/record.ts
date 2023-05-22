@@ -1,5 +1,4 @@
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
-
 const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	const reader = stream?.getReader();
 	let res = "";
@@ -61,5 +60,5 @@ const api = createApi({
 	}),
 });
 
-export const { useFetchReplayFileQuery } = api;
+export const { useFetchReplayFileQuery, useLazyFetchReplayFileQuery } = api;
 export default api;

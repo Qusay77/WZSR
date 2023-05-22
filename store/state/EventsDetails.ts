@@ -21,7 +21,6 @@ interface EventsDetails {
 	replayUrl: string | null;
 	errorsOnly: boolean;
 	searchValue: string;
-	ready: boolean;
 }
 const initialState = {
 	events: [],
@@ -29,7 +28,6 @@ const initialState = {
 	errorsOnly: false,
 	searchValue: "",
 	replayUrl: null,
-	ready: false,
 } as EventsDetails;
 const EventDetailsSlice = createSlice({
 	name: "EventsState",
@@ -61,7 +59,6 @@ const EventDetailsSlice = createSlice({
 				state.events = data;
 				state.details = sessionDetails;
 				state.replayUrl = recordingFile;
-				state.ready = true;
 			},
 		);
 	},

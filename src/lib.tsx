@@ -4,6 +4,7 @@ import { store } from "store";
 import { Provider } from "react-redux";
 import { GlobalStyles, theme } from "./Globals/global";
 import SRWindow from "packages/Screens/SRWindow";
+import { ErrorBoundary } from "react-error-boundary";
 type ParamsType = {
 	sessionId?: string;
 	orgId?: string;
@@ -44,7 +45,29 @@ const SessionRecording = ({
 		<Provider store={store}>
 			<Global styles={GlobalStyles} />
 			<ThemeProvider theme={theme}>
-				<SRWindow sessionId={sessionIdParam ?? sessionIdProps} />
+				<ErrorBoundary
+					onError={(error, componentStack) => {
+						// eslint-disable-next-line no-console
+						console.log(error, componentStack);
+					}}
+					fallback={
+						<div
+							style={{
+								backgroundColor: "white",
+								width: "100%",
+								height: "100vh",
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							Error Wrapper &nbsp; <p style={{ color: "red" }}>Catch</p> &nbsp;
+							Check console
+						</div>
+					}
+				>
+					<SRWindow sessionId={sessionIdParam ?? sessionIdProps} />
+				</ErrorBoundary>
 			</ThemeProvider>
 		</Provider>
 	);

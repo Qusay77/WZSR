@@ -1,6 +1,7 @@
 import rrwebPlayer from "rrweb-player";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import ReplayApi from "src/services/record";
 interface PlayerStateTypes {
 	PlayerInstance: rrwebPlayer | null;
 	skip: boolean;
@@ -13,6 +14,7 @@ interface PlayerStateTypes {
 		endTime: number;
 		totalTime: number;
 	};
+	data: Array<{ [key: string]: string }> | undefined;
 }
 const initialState = {
 	PlayerInstance: null,
@@ -26,6 +28,7 @@ const initialState = {
 		endTime: 0,
 		totalTime: 0,
 	},
+	data: undefined,
 } as PlayerStateTypes;
 const PlayerSlice = createSlice({
 	name: "PlayerState",
@@ -60,6 +63,14 @@ const PlayerSlice = createSlice({
 			state.metaData = action.payload;
 		},
 		resetPlayer: () => initialState,
+	},
+	extraReducers: (builder) => {
+		builder.addMatcher(
+			ReplayApi.endpoints.fetchReplayFile.matchFulfilled,
+			(state, action) => {
+				state.data = action.payload;
+			},
+		);
 	},
 });
 export type { PlayerStateTypes };
