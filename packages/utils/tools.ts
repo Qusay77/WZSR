@@ -61,11 +61,11 @@ const mobileShare = () => {
 };
 const isMacSafariOrChrome = () => {
 	const userAgent = window.navigator.userAgent.toLowerCase();
-	const isMac = /mac/.test(navigator.platform.toLowerCase());
+	// const isMac = /mac/.test(navigator.platform.toLowerCase());
 	const isSafari =
 		userAgent.includes("safari") && !userAgent.includes("chrome");
 	const isChrome = userAgent.includes("chrome");
 
-	return isMac && (isSafari || isChrome);
+	return isSafari || isChrome;
 };
 export { isOverflown, copyToClipboard, mobileShare, isMacSafariOrChrome };
