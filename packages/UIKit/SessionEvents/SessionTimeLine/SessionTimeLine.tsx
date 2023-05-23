@@ -29,7 +29,14 @@ const SessionTimeLine = () => {
 			<SessionTimeLineHeader />
 			<TimeLineSearch />
 			{filteredEvents.map(
-				(e, i) => e && <TimeLineBlock key={`${i}-time-line-block`} event={e} />,
+				(e, i) =>
+					e && (
+						<TimeLineBlock
+							expandOnSearch={i === 0 && !!searchValue.length}
+							key={`${i}-time-line-block`}
+							event={e}
+						/>
+					),
 			)}
 		</SessionTimeLineContainer>
 	);

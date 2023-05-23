@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { EventsDetails } from "store/state/EventsDetails";
 import {
@@ -60,6 +60,7 @@ const TimeLineGroup = ({ group }: { group: Array<GroupType> }) => {
 
 const TimeLineBlock = ({
 	event,
+	expandOnSearch,
 }: {
 	event: {
 		duration: string;
@@ -69,6 +70,7 @@ const TimeLineBlock = ({
 			data: Array<GroupType>;
 		};
 	};
+	expandOnSearch: boolean;
 }) => {
 	const [expanded, setExpand] = useState(false);
 	const { name, duration, expandPageView } = event;
@@ -85,7 +87,9 @@ const TimeLineBlock = ({
 
 	const entryMS = entry.valueOf();
 	const startMS = start.valueOf();
-
+	useEffect(() => {
+		setExpand(expandOnSearch);
+	}, [expandOnSearch]);
 	return !render ? (
 		<TimeLineBlockContainer>
 			<TimeLineBlockInline

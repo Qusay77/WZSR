@@ -27,6 +27,7 @@ const TimeLineBlockInlineContainer = styled.div<{ expanded: boolean }>`
 		gap: ${({ theme }) => theme.helpers.clamp(10, 16, 260, 1000)};
 		height: ${({ theme }) => theme.helpers.clamp(40, 64, 260, 1000)};
 	}
+	cursor: pointer;
 `;
 
 const TypeBlock = styled.div`
@@ -154,14 +155,15 @@ const TimeLineBlockInline = ({
 	const { PlayerInstance, play } = usePlayer(true);
 
 	return (
-		<TimeLineBlockInlineContainer expanded={expanded}>
+		<TimeLineBlockInlineContainer onClick={onExpandClick} expanded={expanded}>
 			<TypeBlock>
 				<StyledRecord
-					onClick={() => {
+					onClick={(e) => {
+						e.stopPropagation();
 						// eslint-disable-next-line no-console
 						console.log(skipTo);
 						if (Number.isInteger(skipTo)) {
-							PlayerInstance?.goto(skipTo, play);
+							PlayerInstance?.goto(skipTo > 0 ? skipTo : 1, play);
 						}
 					}}
 				/>
@@ -174,11 +176,7 @@ const TimeLineBlockInline = ({
 					<p>{durationStr}</p>
 				</DurationAndErrorsBlock>
 				<TextSeparator />
-				{expanded ? (
-					<StyledArrowUp onClick={onExpandClick} />
-				) : (
-					<StyledArrowDown onClick={onExpandClick} />
-				)}
+				{expanded ? <StyledArrowUp /> : <StyledArrowDown />}
 			</InfoBlock>
 		</TimeLineBlockInlineContainer>
 	);

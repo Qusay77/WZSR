@@ -43,8 +43,10 @@ const Player = () => {
 		}
 
 		return () => {
-			dispatch(resetPlayer());
-			dispatch(setPlayer(null));
+			if (import.meta.env.VITE_APP_ENV === "production") {
+				dispatch(resetPlayer());
+				dispatch(setPlayer(null));
+			}
 		};
 	}, [PlayerRef, data]);
 	usePlayerDimensions(PlayerRef?.current);
