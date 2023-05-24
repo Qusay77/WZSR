@@ -28,6 +28,10 @@ const GroupItem = ({
 		status,
 		custom_data,
 		error_message,
+		script_domain,
+		script_path,
+		http_request,
+		page_url,
 	} = groupItem;
 	useEffect(() => {
 		setExpand(expandOnSearch);
@@ -47,6 +51,11 @@ const GroupItem = ({
 					method={method}
 					status={status}
 					duration={duration}
+					scriptDomain={script_domain}
+					scriptPath={script_path}
+					httpRequest={http_request}
+					type={type}
+					pageUrl={page_url}
 					custom_data={
 						custom_data as { definitionName: string; value: string }[]
 					}

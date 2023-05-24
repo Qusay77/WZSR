@@ -17,6 +17,10 @@ const SessionTimeLine = () => {
 		"status",
 		"name",
 		"custom_data",
+		"script_domain",
+		"script_path",
+		"http_request",
+		"page_url",
 	];
 
 	const filteredEvents = events

@@ -7,6 +7,9 @@ type GroupType = {
 	duration?: string;
 	method?: string;
 	status?: number;
+	script_domain?: string;
+	script_path?: string;
+	http_request?: string;
 	custom_data?:
 		| Array<{ definitionName: string; value: string }>
 		| string

@@ -26,8 +26,10 @@ const EssentialInfoBlock = styled.div`
 		font-style: normal;
 		font-weight: 400;
 		font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
-		white-space: nowrap;
 		line-height: 17px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	p:nth-of-type(1) {
 		color: var(--Text-Sub);
@@ -89,13 +91,27 @@ const ExpandedErrorBlock = styled.div`
 `;
 const ExpandedTextBoard = styled.div`
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+	text-align: start;
+	word-break: break-word;
 	padding: 16px;
 	isolation: isolate;
 	width: 100%;
 	height: fit-content;
 	background: #f8f8f8;
+	border-radius: 4px;
+	overflow-y: auto;
+	font-style: normal;
+	font-weight: 400;
+	font-size: ${({ theme }) => theme.helpers.clamp(12, 14, 1000, 1920)};
+	line-height: 17px;
+	color: var(--Text-Body);
+`;
+const ExpandedText = styled.div`
+	display: flex;
+	text-align: start;
+	isolation: isolate;
+	width: 100%;
+	height: fit-content;
 	border-radius: 4px;
 	overflow-y: auto;
 	font-style: normal;
@@ -136,6 +152,7 @@ const MiniListItem = styled.div`
 		font-weight: 400;
 	}
 `;
+
 const TimeLineBlockExpanded = ({
 	method,
 	status,
@@ -143,35 +160,82 @@ const TimeLineBlockExpanded = ({
 	custom_data,
 	isError,
 	errorMessage,
+	scriptDomain,
+	scriptPath,
+	httpRequest,
+	type,
+	pageUrl,
 }: {
 	duration?: string;
 	method?: string;
 	status?: number;
-	custom_data?: Array<{ definitionName: string; value: string }> | null;
 	isError?: boolean;
-	errorMessage: string;
+	errorMessage?: string;
+	scriptDomain?: string;
+	scriptPath?: string;
+	httpRequest?: string;
+	type?: string;
+	custom_data?: Array<{ definitionName: string; value: string }> | null;
+	pageUrl?: string;
 }) => {
-	const durationStr = duration ? duration?.split(".")[0] : "";
+	const durationStr = duration ? duration?.split(".")[0] : null;
 	let CustomData = custom_data;
 	if (typeof custom_data === "string") {
 		CustomData = JSON.parse(custom_data);
 	}
+	const hasStatus = type === "goal" || type === "failed_call";
+	const hasHttpCall = type === "failed_call";
+	const isJSError = type === "js_error";
+	const isPageView = type === "page_view";
 	return (
 		<TimeLineBlockExpandedContainer>
 			<EssentialInfoBlockRow>
-				<EssentialInfoBlock>
-					<p>Status Code</p>
-					<p>{status ?? "No Info"}</p>
-				</EssentialInfoBlock>
-				<EssentialInfoBlock>
-					<p>Method</p>
-					<p>{method ?? "No Info"}</p>
-				</EssentialInfoBlock>
-				<EssentialInfoBlock>
-					<p>Duration</p>
-					<p>{durationStr ?? "No Info"}</p>
-				</EssentialInfoBlock>
+				{hasStatus && (
+					<>
+						<EssentialInfoBlock>
+							<p>Status Code</p>
+							<p>{status ?? "No Info"}</p>
+						</EssentialInfoBlock>
+						<EssentialInfoBlock>
+							<p>Method</p>
+							<p>{method ?? "No Info"}</p>
+						</EssentialInfoBlock>
+						<EssentialInfoBlock>
+							<p>Duration</p>
+							<p>{durationStr ?? "No Info"}</p>
+						</EssentialInfoBlock>
+					</>
+				)}
+				{isJSError && (
+					<>
+						<EssentialInfoBlock>
+							<p>Script Domain</p>
+							<p>{scriptDomain ?? "No Info"}</p>
+						</EssentialInfoBlock>
+						<EssentialInfoBlock>
+							<p>Script Path</p>
+							<p>{scriptPath ?? "No Info"}</p>
+						</EssentialInfoBlock>
+					</>
+				)}
+				{isPageView ? (
+					<ExpandedErrorBlock>
+						<p>Page URL</p>
+						<ExpandedText>
+							<p>{pageUrl}</p>
+						</ExpandedText>
+					</ExpandedErrorBlock>
+				) : null}
 			</EssentialInfoBlockRow>
+
+			{hasHttpCall ? (
+				<ExpandedErrorBlock>
+					<p>HTTP Request</p>
+					<ExpandedText>
+						<p>{httpRequest}</p>
+					</ExpandedText>
+				</ExpandedErrorBlock>
+			) : null}
 			{isError && errorMessage ? (
 				<ExpandedErrorBlock>
 					<p>Error Message</p>
