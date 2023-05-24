@@ -3,11 +3,12 @@ import { usePlayer } from "packages/rrweb";
 import { Dispatch, SetStateAction } from "react";
 import { Truncate } from ".";
 import {
-	Error,
 	StyledRecord,
 	StyledArrowDown,
 	StyledArrowUp,
-	Warning,
+	JSError,
+	FailedCall,
+	FailedGoal,
 } from "../svg";
 
 const TimeLineBlockInlineContainer = styled.div<{ expanded: boolean }>`
@@ -145,13 +146,16 @@ const TimeLineBlockInline = ({
 	const onExpandClick = () => {
 		setExpand((prev) => !prev);
 	};
-	const durationStr = duration ? duration?.split(".")[0] : "";
+	const durationStr = duration ? duration?.split(".")[0] : null;
 	const hasJsError =
 		hasErrors?.find((e) => e === "js_error") ||
 		(isError && type === "js_error");
+	const isFailedCall =
+		hasErrors?.find((e) => e === "failed_call") ||
+		(isError && type === "failed_call");
 	const hasOtherErrors =
-		hasErrors?.find((e) => e !== "js_error") ||
-		(isError && type !== "js_error");
+		hasErrors?.find((e) => e === "page_view" || e === "goal") ||
+		(isError && (type === "page_view" || type === "goal"));
 	const { PlayerInstance, play } = usePlayer(true);
 
 	return (
@@ -171,9 +175,11 @@ const TimeLineBlockInline = ({
 			</TypeBlock>
 			<InfoBlock>
 				<DurationAndErrorsBlock>
-					{hasJsError ? <Error /> : ""}
-					{hasOtherErrors ? <Warning /> : ""}
-					<p>{durationStr}</p>
+					{hasJsError ? <JSError /> : ""}
+					{hasOtherErrors ? <FailedGoal /> : ""}
+					{isFailedCall ? <FailedCall /> : ""}
+
+					<p>{durationStr ?? "-:--"}</p>
 				</DurationAndErrorsBlock>
 				<TextSeparator />
 				{expanded ? <StyledArrowUp /> : <StyledArrowDown />}
