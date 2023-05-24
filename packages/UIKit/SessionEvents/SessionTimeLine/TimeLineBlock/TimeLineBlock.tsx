@@ -10,7 +10,13 @@ import { TimeLineBlockExpanded } from "./Blocks/TimeLineExpandedBlocks";
 import { TimeLineBlockInline } from "./Blocks/TimeLineInlineBlocks";
 import { GroupType } from "./types";
 import moment from "moment-timezone";
-const GroupItem = ({ groupItem }: { groupItem: GroupType }) => {
+const GroupItem = ({
+	groupItem,
+	expandOnSearch,
+}: {
+	expandOnSearch: boolean;
+	groupItem: GroupType;
+}) => {
 	const [expanded, setExpand] = useState(false);
 
 	const {
@@ -23,7 +29,9 @@ const GroupItem = ({ groupItem }: { groupItem: GroupType }) => {
 		custom_data,
 		error_message,
 	} = groupItem;
-
+	useEffect(() => {
+		setExpand(expandOnSearch);
+	}, [expandOnSearch]);
 	return (
 		<TimeLineBlockContainer>
 			<TimeLineBlockInline
@@ -39,7 +47,9 @@ const GroupItem = ({ groupItem }: { groupItem: GroupType }) => {
 					method={method}
 					status={status}
 					duration={duration}
-					custom_data={custom_data}
+					custom_data={
+						custom_data as { definitionName: string; value: string }[]
+					}
 					isError={isError}
 					errorMessage={error_message}
 				/>
@@ -48,11 +58,21 @@ const GroupItem = ({ groupItem }: { groupItem: GroupType }) => {
 	);
 };
 
-const TimeLineGroup = ({ group }: { group: Array<GroupType> }) => {
+const TimeLineGroup = ({
+	group,
+	expandOnSearch,
+}: {
+	expandOnSearch: boolean;
+	group: Array<GroupType>;
+}) => {
 	return (
 		<TimeLineExpandedGroup>
 			{group.map((g, i) => (
-				<GroupItem groupItem={g} key={`${i}-group-item`} />
+				<GroupItem
+					expandOnSearch={expandOnSearch && i === 0}
+					groupItem={g}
+					key={`${i}-group-item`}
+				/>
 			))}
 		</TimeLineExpandedGroup>
 	);
@@ -101,7 +121,9 @@ const TimeLineBlock = ({
 				skipTo={entryMS - startMS}
 			/>
 			<TimeLineExpandedList expanded={expanded}>
-				{expanded ? <TimeLineGroup group={data} /> : null}
+				{expanded ? (
+					<TimeLineGroup expandOnSearch={expandOnSearch} group={data} />
+				) : null}
 			</TimeLineExpandedList>
 		</TimeLineBlockContainer>
 	) : null;

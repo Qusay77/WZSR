@@ -26,17 +26,18 @@ const SessionTimeLine = () => {
 			const { name, expandPageView } = FilteredEvent;
 			const { data } = expandPageView;
 			const viewNames = data.filter((obj: GroupType) => {
-				if (obj.custom_data) {
-					const parsed = JSON.parse(obj.custom_data as string);
-					obj.custom_data = parsed
+				const FilteredData = cloneDeep(obj);
+				if (FilteredData.custom_data) {
+					const parsed = JSON.parse(FilteredData.custom_data as string);
+					FilteredData.custom_data = parsed
 						.map((p: { [key: string]: string }) => Object.values(p))
 						.flat()
 						.join("®");
 				}
-				const matches = Object.keys(obj).some((key) => {
+				const matches = Object.keys(FilteredData).some((key) => {
 					return (
 						SearchCriteria.includes(key) &&
-						obj[key]
+						FilteredData[key]
 							?.toString()
 							.toLowerCase()
 							.includes(searchValue.toLocaleLowerCase())
