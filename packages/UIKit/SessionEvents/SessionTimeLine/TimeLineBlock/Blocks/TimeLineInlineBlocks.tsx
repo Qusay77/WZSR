@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import moment from "moment";
 import { usePlayer } from "packages/rrweb";
 import { Dispatch, SetStateAction } from "react";
 import { Truncate } from ".";
@@ -132,6 +133,7 @@ const TimeLineBlockInline = ({
 	isError,
 	type,
 	hasErrors,
+	startTime,
 	skipTo = 1,
 }: {
 	expanded: boolean;
@@ -140,13 +142,20 @@ const TimeLineBlockInline = ({
 	duration?: string;
 	isError?: boolean;
 	type?: string;
+	startTime?: number;
 	hasErrors?: Array<string | undefined>;
 	skipTo?: number;
 }) => {
 	const onExpandClick = () => {
 		setExpand((prev) => !prev);
 	};
+	// ?
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const durationStr = duration ? duration?.split(".")[0] : null;
+	const formattedTime = startTime
+		? moment.utc(startTime > 0 ? startTime : 1).format("mm:ss")
+		: "-:--";
+	const time = formattedTime;
 	const hasJsError =
 		hasErrors?.find((e) => e === "js_error") ||
 		(isError && type === "js_error");
@@ -179,7 +188,7 @@ const TimeLineBlockInline = ({
 					{hasOtherErrors ? <FailedGoal /> : ""}
 					{isFailedCall ? <FailedCall /> : ""}
 
-					<p>{durationStr ?? "-:--"}</p>
+					<p>{time}</p>
 				</DurationAndErrorsBlock>
 				<TextSeparator />
 				{expanded ? <StyledArrowUp /> : <StyledArrowDown />}

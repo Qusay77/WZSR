@@ -32,19 +32,31 @@ const GroupItem = ({
 		script_path,
 		http_request,
 		page_url,
+		timeStamp,
 	} = groupItem;
 	useEffect(() => {
 		setExpand(expandOnSearch);
 	}, [expandOnSearch]);
+	const { details } = useSelector(
+		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
+	);
+	const format = "YYYY-MM-DD HH:mm:ss.SSS Z";
+	const entry = moment(timeStamp, format);
+	const start = moment(details?.dateTime, format);
+
+	const entryMS = entry.valueOf();
+	const startMS = start.valueOf();
 	return (
 		<TimeLineBlockContainer>
 			<TimeLineBlockInline
 				name={name}
 				duration={duration}
+				startTime={entryMS - startMS}
 				setExpand={setExpand}
 				expanded={expanded}
 				isError={isError}
 				type={type}
+				skipTo={entryMS - startMS}
 			/>
 			{expanded ? (
 				<TimeLineBlockExpanded
@@ -105,7 +117,6 @@ const TimeLineBlock = ({
 	const { name, duration, expandPageView } = event;
 	const { data, entryTime } = expandPageView;
 	const hasErrors = data.filter((e) => e.isError).map((e) => e.type);
-
 	const { errorsOnly, details } = useSelector(
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
@@ -124,6 +135,7 @@ const TimeLineBlock = ({
 			<TimeLineBlockInline
 				name={name}
 				duration={duration}
+				startTime={entryMS - startMS}
 				setExpand={setExpand}
 				expanded={expanded}
 				hasErrors={hasErrors}

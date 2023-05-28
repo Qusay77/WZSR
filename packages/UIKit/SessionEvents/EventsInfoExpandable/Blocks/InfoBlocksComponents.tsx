@@ -17,8 +17,6 @@ import "react-tooltip/dist/react-tooltip.css";
 import styled from "@emotion/styled";
 import { BrowsersTypes, BrowserType, DevicesTypes, ValueType } from "./types";
 import { TextSeparator, Truncate } from ".";
-import { copyToClipboard } from "packages/utils";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { EventsDetails } from "store/state/EventsDetails";
 import { GenerateSessionAnalyticsURl } from "packages/utils/SAHelpers";
@@ -150,7 +148,7 @@ const UserIdBlock = ({ value }: ValueType) => {
 				<>
 					<User />
 					<StyledTooltip id="#userIdCopy">
-						View <p>n</p> User sessions over the <p>last 30 days</p>
+						View User sessions over the <p>last 30 days</p>
 					</StyledTooltip>
 
 					<StyledTooltip id="#userId">{value ?? ""}</StyledTooltip>
@@ -173,31 +171,17 @@ const UserIdBlock = ({ value }: ValueType) => {
 };
 
 const ReferrerBlock = ({ value }: ValueType) => {
-	const [copied, setCopied] = useState(false);
-	const handleClick = () => {
-		setCopied(true);
-		setTimeout(() => setCopied(false), 2000);
-	};
 	return (
 		<div>
 			{value ? (
 				<>
 					<Referrer />
-					<StyledTooltip isOpen={copied} id="#referrerText">
-						{copied && "Copied"}
-					</StyledTooltip>
+
 					<StyledTooltip id="#referrer" clickable>
 						{value ?? ""}
 					</StyledTooltip>
 					<span>
 						<Truncate data-tooltip-id="#referrer">{value ?? ""}</Truncate>
-						<StyledCopy
-							data-tooltip-id="#referrerText"
-							onClick={() => {
-								handleClick();
-								copyToClipboard(value);
-							}}
-						/>
 					</span>
 				</>
 			) : (
