@@ -82,19 +82,32 @@ const GroupItem = ({
 const TimeLineGroup = ({
 	group,
 	expandOnSearch,
+	filterErrors,
 }: {
 	expandOnSearch: boolean;
+	filterErrors: boolean;
 	group: Array<GroupType>;
 }) => {
 	return (
 		<TimeLineExpandedGroup>
-			{group.map((g, i) => (
-				<GroupItem
-					expandOnSearch={expandOnSearch && i === 0}
-					groupItem={g}
-					key={`${i}-group-item`}
-				/>
-			))}
+			{group.map((g, i) => {
+				if (filterErrors) {
+					return g.isError ? (
+						<GroupItem
+							expandOnSearch={expandOnSearch && i === 0}
+							groupItem={g}
+							key={`${i}-group-item`}
+						/>
+					) : null;
+				}
+				return (
+					<GroupItem
+						expandOnSearch={expandOnSearch && i === 0}
+						groupItem={g}
+						key={`${i}-group-item`}
+					/>
+				);
+			})}
 		</TimeLineExpandedGroup>
 	);
 };
@@ -143,7 +156,11 @@ const TimeLineBlock = ({
 			/>
 			<TimeLineExpandedList expanded={expanded}>
 				{expanded ? (
-					<TimeLineGroup expandOnSearch={expandOnSearch} group={data} />
+					<TimeLineGroup
+						filterErrors={errorsOnly && !!hasErrors.length}
+						expandOnSearch={expandOnSearch}
+						group={data}
+					/>
 				) : null}
 			</TimeLineExpandedList>
 		</TimeLineBlockContainer>
