@@ -3,21 +3,32 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { GroupType } from "packages/UIKit/SessionEvents/SessionTimeLine/TimeLineBlock/types";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type DetailsSSType = {
+	country: string;
+	dateTime: string;
+	device: string;
+	referrerPath: string;
+	userBrowser: string;
+	userId: string;
+	userBrowserVersion: string;
+};
+type DetailsSFType = {
+	COUNTRY: string;
+	DATETIME: string;
+	DEVICE: string;
+	REFERRERPATH: string;
+	USERBROWSER: string;
+	USERID: string;
+	USERBROWSERVERSION: string;
+};
 interface EventsDetails {
 	events: Array<{
 		duration: string;
 		name: string;
 		expandPageView: { entryTime: string; data: Array<GroupType> };
 	}>;
-	details: {
-		country: string;
-		dateTime: string;
-		device: string;
-		referrerPath: string;
-		userBrowser: string;
-		userId: string;
-		userBrowserVersion: string;
-	} | null;
+	details: DetailsSFType | null;
 	replayUrl: string | null;
 	errorsOnly: boolean;
 	searchValue: string;

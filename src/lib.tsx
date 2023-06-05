@@ -26,20 +26,31 @@ function paramsToObject(
 const SessionRecording = ({
 	container,
 	sessionId,
+	orgId,
+	sessionDate,
 }: {
 	container?: { attributes: NamedNodeMap };
 	sessionId?: string;
+	orgId: string;
+	sessionDate: string;
 }) => {
 	const urlParams = new URLSearchParams(window.location.search);
 	const entries = urlParams.entries();
 	const queryParams = paramsToObject(entries);
 
-	const { sessionId: sessionIdParam } = queryParams;
+	const {
+		orgId: orgIdParam,
+		sessionId: sessionIdParam,
+		sessionDate: sessionDateParam,
+	} = queryParams;
 	const sessionIdProps =
 		sessionId ?? container?.attributes?.getNamedItem("sessionId")?.value;
-
-	console.log(sessionIdParam, "params");
-	console.log(sessionIdProps, "props");
+	const orgIdProps =
+		orgId ?? container?.attributes?.getNamedItem("orgId")?.value;
+	const sessionDateProps =
+		sessionDate ?? container?.attributes?.getNamedItem("sessionDate")?.value;
+	console.log(orgIdParam, sessionIdParam, sessionDateParam, "params");
+	console.log(orgIdProps, sessionIdProps, sessionDateProps, "props");
 
 	return (
 		<Provider store={store}>
@@ -66,7 +77,13 @@ const SessionRecording = ({
 						</div>
 					}
 				>
-					<SRWindow sessionId={sessionIdParam ?? sessionIdProps} />
+					<SRWindow
+						sessionInfo={{
+							orgId: orgIdParam ?? orgIdProps,
+							sessionId: sessionIdParam ?? sessionIdProps,
+							sessionDate: sessionDateParam ?? sessionDateProps,
+						}}
+					/>
 				</ErrorBoundary>
 			</ThemeProvider>
 		</Provider>

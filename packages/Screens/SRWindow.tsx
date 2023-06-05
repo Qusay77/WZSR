@@ -10,7 +10,12 @@ import { useFetchSessionDetailsQuery } from "src/services/details";
 import { ErrorBoundary } from "react-error-boundary";
 import { PlayerStateTypes } from "store/state/PlayerStore";
 import { useLazyFetchReplayFileQuery } from "src/services/record/record";
-const SRWindow = ({ sessionId }: { sessionId?: string }) => {
+type ParamsType = {
+	sessionId?: string;
+	orgId?: string;
+	sessionDate?: string;
+};
+const SRWindow = ({ sessionInfo }: { sessionInfo: ParamsType }) => {
 	const handle = useFullScreenHandle();
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
@@ -21,6 +26,7 @@ const SRWindow = ({ sessionId }: { sessionId?: string }) => {
 	const { data } = useSelector(
 		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
 	);
+	const { sessionId } = sessionInfo;
 	if (!sessionId) {
 		return (
 			<div
@@ -37,9 +43,7 @@ const SRWindow = ({ sessionId }: { sessionId?: string }) => {
 			</div>
 		);
 	}
-	useFetchSessionDetailsQuery({
-		sessionId: sessionId,
-	});
+	useFetchSessionDetailsQuery(sessionInfo);
 	const { replayUrl } = useSelector(
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);

@@ -1,6 +1,8 @@
 type BrowserType = {
 	userBrowser?: string;
 	userBrowserVersion?: string;
+	USERBROWSER?: string;
+	USERBROWSERVERSION?: string;
 };
 type ValueType = {
 	value: string;

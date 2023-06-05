@@ -42,7 +42,7 @@ const GroupItem = ({
 	);
 	const format = "YYYY-MM-DD HH:mm:ss.SSS Z";
 	const entry = moment(timeStamp, format);
-	const start = moment(details?.dateTime, format);
+	const start = moment(details?.DATETIME, format);
 
 	const entryMS = entry.valueOf();
 	const startMS = start.valueOf();
@@ -136,7 +136,7 @@ const TimeLineBlock = ({
 	const render = errorsOnly ? !hasErrors.length : false;
 	const format = "YYYY-MM-DD HH:mm:ss.SSS Z";
 	const entry = moment(entryTime, format);
-	const start = moment(details?.dateTime, format);
+	const start = moment(details?.DATETIME, format);
 
 	const entryMS = entry.valueOf();
 	const startMS = start.valueOf();

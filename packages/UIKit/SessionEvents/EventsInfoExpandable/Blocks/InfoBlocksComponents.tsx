@@ -119,15 +119,15 @@ const LocationBlock = ({ value }: ValueType) => {
 	);
 };
 const BrowserBlock = ({ value }: { value: BrowserType }) => {
-	const { userBrowser, userBrowserVersion } = value;
-	const Icon = Browsers[userBrowser as keyof BrowsersTypes];
+	const { USERBROWSER, USERBROWSERVERSION } = value;
+	const Icon = Browsers[USERBROWSER as keyof BrowsersTypes];
 	return (
 		<div>
-			{userBrowser ? <Icon /> : null}
-			{userBrowser && userBrowserVersion ? (
+			{USERBROWSER ? <Icon /> : null}
+			{USERBROWSER && USERBROWSERVERSION ? (
 				<span>
-					{userBrowser ?? <MissingText>Browser Unknown</MissingText>}{" "}
-					{userBrowserVersion ?? <MissingText>Version Unknown</MissingText>}
+					{USERBROWSER ?? <MissingText>Browser Unknown</MissingText>}{" "}
+					{USERBROWSERVERSION ?? <MissingText>Version Unknown</MissingText>}
 				</span>
 			) : (
 				<MissingText>Device Info Missing</MissingText>
@@ -140,11 +140,11 @@ const UserIdBlock = ({ value }: ValueType) => {
 	const { details } = useSelector(
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
-	const SALink = GenerateSessionAnalyticsURl(details?.userId || "");
+	const SALink = GenerateSessionAnalyticsURl(details?.USERID || "");
 	const url = `https://portal.webeyez.com/sessions/analytic?${SALink}`;
 	return (
 		<div>
-			{details?.userId ? (
+			{details?.USERID ? (
 				<>
 					<User />
 					<StyledTooltip id="#userIdCopy">

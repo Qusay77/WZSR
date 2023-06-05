@@ -43,21 +43,21 @@ const InfoBlocks = ({ showMore }: { showMore: boolean }) => {
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
 	const {
-		country,
-		dateTime,
-		device,
-		referrerPath,
-		userBrowser,
-		userId,
-		userBrowserVersion,
+		COUNTRY,
+		DATETIME,
+		DEVICE,
+		REFERRERPATH,
+		USERBROWSER,
+		USERID,
+		USERBROWSERVERSION,
 	} = details || {};
 	const match: MatchType = {
-		"Session Time": dateTime,
-		Device: device,
-		Location: country,
-		Browser: { userBrowser, userBrowserVersion },
-		"User ID": userId,
-		Referrer: referrerPath,
+		"Session Time": DATETIME,
+		Device: DEVICE,
+		Location: COUNTRY,
+		Browser: { USERBROWSER, USERBROWSERVERSION },
+		"User ID": USERID,
+		Referrer: REFERRERPATH,
 	};
 	return (
 		<InfoBlocksContainer>
