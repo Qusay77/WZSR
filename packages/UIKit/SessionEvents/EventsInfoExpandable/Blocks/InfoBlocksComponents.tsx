@@ -20,7 +20,7 @@ import { TextSeparator, Truncate } from ".";
 import { useSelector } from "react-redux";
 import { EventsDetails } from "store/state/EventsDetails";
 import { GenerateSessionAnalyticsURl } from "packages/utils/SAHelpers";
-import moment from "moment";
+import moment from "moment-timezone";
 const Devices: DevicesTypes = {
 	Mobile,
 	Desktop,
@@ -68,6 +68,9 @@ const SessionTimeBlock = ({ value }: ValueType) => {
 
 	const formattedDate = dateTime.format("YYYY-MM-DD");
 	const formattedTime = dateTime.format("HH:mm:ss");
+	const split = value?.split(" ");
+	const formattedTimeZone = split[split.length - 1];
+
 	return (
 		<div>
 			{value ? (
@@ -75,6 +78,8 @@ const SessionTimeBlock = ({ value }: ValueType) => {
 					<Calendar />
 					<span>
 						{formattedDate ?? ""} <TextSeparator /> {formattedTime ?? ""}
+						<TextSeparator />
+						{formattedTimeZone}
 					</span>
 				</>
 			) : (
