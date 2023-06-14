@@ -43,7 +43,7 @@ const GroupItem = ({
 	const format = "YYYY-MM-DD HH:mm:ss.SSS Z";
 	const entry = moment(timeStamp, format);
 	const entryMS = entry.valueOf();
-	const startMS = moment(details?.DATETIME).valueOf();
+	const startMS = moment(details?.USERDATETIME).valueOf();
 
 	return (
 		<TimeLineBlockContainer>
