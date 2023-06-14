@@ -44,7 +44,8 @@ const InfoBlocks = ({ showMore }: { showMore: boolean }) => {
 	);
 	const {
 		COUNTRY,
-		DATETIME,
+		// DATETIME,
+		USERDATETIME,
 		DEVICE,
 		REFERRERPATH,
 		USERBROWSER,
@@ -52,7 +53,7 @@ const InfoBlocks = ({ showMore }: { showMore: boolean }) => {
 		USERBROWSERVERSION,
 	} = details || {};
 	const match: MatchType = {
-		"Session Time": DATETIME,
+		"Session Time": USERDATETIME,
 		Device: DEVICE,
 		Location: COUNTRY,
 		Browser: { USERBROWSER, USERBROWSERVERSION },

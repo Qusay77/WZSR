@@ -16,6 +16,7 @@ type DetailsSSType = {
 type DetailsSFType = {
 	COUNTRY: string;
 	DATETIME: string;
+	USERDATETIME: string;
 	DEVICE: string;
 	REFERRERPATH: string;
 	USERBROWSER: string;
