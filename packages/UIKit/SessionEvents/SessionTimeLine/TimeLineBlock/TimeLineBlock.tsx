@@ -137,10 +137,10 @@ const TimeLineBlock = ({
 	const entry = moment(entryTime, format);
 
 	const entryMS = entry.valueOf();
-	const startMS = moment(details?.DATETIME).valueOf();
+	const startMS = moment(details?.USERDATETIME).valueOf();
 
 	// eslint-disable-next-line no-console
-	console.log(entryMS, details?.DATETIME, "DateFormat");
+	console.log(entryMS, details?.USERDATETIME, "DateFormat");
 
 	useEffect(() => {
 		setExpand(expandOnSearch);
