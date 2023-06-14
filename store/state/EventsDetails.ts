@@ -22,6 +22,7 @@ type DetailsSFType = {
 	USERBROWSER: string;
 	USERID: string;
 	USERBROWSERVERSION: string;
+	isError: boolean;
 };
 interface EventsDetails {
 	events: Array<{
@@ -33,6 +34,7 @@ interface EventsDetails {
 	replayUrl: string | null;
 	errorsOnly: boolean;
 	searchValue: string;
+	attachedError?: string | null;
 }
 const initialState = {
 	events: [],
@@ -40,6 +42,7 @@ const initialState = {
 	errorsOnly: false,
 	searchValue: "",
 	replayUrl: null,
+	attachedError: null,
 } as EventsDetails;
 const EventDetailsSlice = createSlice({
 	name: "EventsState",
@@ -67,10 +70,11 @@ const EventDetailsSlice = createSlice({
 		builder.addMatcher(
 			DetailsAPi.endpoints.fetchSessionDetails.matchFulfilled,
 			(state, action) => {
-				const { sessionDetails, data, recordingFile } = action.payload;
+				const { sessionDetails, data, recordingFile, error } = action.payload;
 				state.events = data;
 				state.details = sessionDetails;
 				state.replayUrl = recordingFile;
+				state.attachedError = error;
 			},
 		);
 	},

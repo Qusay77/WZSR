@@ -17,6 +17,7 @@ type ParamsType = {
 };
 const SRWindow = ({ sessionInfo }: { sessionInfo: ParamsType }) => {
 	const handle = useFullScreenHandle();
+
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
 			window.dispatchEvent(new Event("resize"));
@@ -26,8 +27,8 @@ const SRWindow = ({ sessionInfo }: { sessionInfo: ParamsType }) => {
 	const { data } = useSelector(
 		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
 	);
-	const { sessionId } = sessionInfo;
-	if (!sessionId) {
+	const { sessionId, orgId, sessionDate } = sessionInfo;
+	if (!sessionId || !orgId || !sessionDate) {
 		return (
 			<div
 				style={{
@@ -39,21 +40,42 @@ const SRWindow = ({ sessionInfo }: { sessionInfo: ParamsType }) => {
 					alignItems: "center",
 				}}
 			>
-				Session ID is &nbsp; <p style={{ color: "red" }}>Missing</p>
+				Params &nbsp; <p style={{ color: "red" }}>Missing</p>
 			</div>
 		);
 	}
-	useFetchSessionDetailsQuery(sessionInfo);
-	const { replayUrl } = useSelector(
+	const { replayUrl, details, attachedError } = useSelector(
 		({ EventsState }: { EventsState: EventsDetails }) => EventsState,
 	);
+	useFetchSessionDetailsQuery(sessionInfo);
+
 	const [fetchReplayFile, { isError }] = useLazyFetchReplayFileQuery();
 	useEffect(() => {
 		if (replayUrl) {
 			fetchReplayFile(replayUrl);
 		}
 	}, [replayUrl]);
-
+	if (details?.isError) {
+		return (
+			<div
+				style={{
+					backgroundColor: "white",
+					width: "100%",
+					height: "100vh",
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+			>
+				{attachedError ?? (
+					<div>
+						Unknown &nbsp; <p style={{ color: "red" }}>Error</p> None was
+						Provided from Server
+					</div>
+				)}
+			</div>
+		);
+	}
 	if (isError) {
 		return (
 			<div
