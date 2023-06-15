@@ -44,7 +44,6 @@ const GroupItem = ({
 	const entry = moment(timeStamp, format);
 	const entryMS = entry.valueOf();
 	const startMS = moment(details?.USERDATETIME).valueOf();
-
 	return (
 		<TimeLineBlockContainer>
 			<TimeLineBlockInline
@@ -55,7 +54,6 @@ const GroupItem = ({
 				expanded={expanded}
 				isError={isError}
 				type={type}
-				skipTo={entryMS - startMS}
 			/>
 			{expanded ? (
 				<TimeLineBlockExpanded
@@ -139,9 +137,6 @@ const TimeLineBlock = ({
 	const entryMS = entry.valueOf();
 	const startMS = moment(details?.USERDATETIME).valueOf();
 
-	// eslint-disable-next-line no-console
-	console.log(entryMS, details?.USERDATETIME, "DateFormat");
-
 	useEffect(() => {
 		setExpand(expandOnSearch);
 	}, [expandOnSearch]);
@@ -154,7 +149,6 @@ const TimeLineBlock = ({
 				setExpand={setExpand}
 				expanded={expanded}
 				hasErrors={hasErrors}
-				skipTo={entryMS - startMS}
 			/>
 			<TimeLineExpandedList expanded={expanded}>
 				{expanded ? (

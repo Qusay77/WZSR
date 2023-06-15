@@ -133,8 +133,7 @@ const TimeLineBlockInline = ({
 	isError,
 	type,
 	hasErrors,
-	startTime,
-	skipTo = 1,
+	startTime = 0,
 }: {
 	expanded: boolean;
 	setExpand: Dispatch<SetStateAction<boolean>>;
@@ -144,7 +143,6 @@ const TimeLineBlockInline = ({
 	type?: string;
 	startTime?: number;
 	hasErrors?: Array<string | undefined>;
-	skipTo?: number;
 }) => {
 	const onExpandClick = () => {
 		setExpand((prev) => !prev);
@@ -155,6 +153,14 @@ const TimeLineBlockInline = ({
 	const formattedTime = startTime
 		? moment.utc(startTime > 0 ? startTime : 1).format("mm:ss")
 		: "-:--";
+	const timeMS = formattedTime
+		.split(":")
+		.reduce(
+			(acc, val, i) =>
+				acc + (i === 0 ? parseInt(val) * 60000 : parseInt(val) * 1000),
+			0,
+		);
+
 	const time = formattedTime;
 	const hasJsError =
 		hasErrors?.find((e) => e === "js_error") ||
@@ -174,9 +180,9 @@ const TimeLineBlockInline = ({
 					onClick={(e) => {
 						e.stopPropagation();
 						// eslint-disable-next-line no-console
-						console.log(skipTo);
-						if (Number.isInteger(skipTo)) {
-							PlayerInstance?.goto(skipTo > 0 ? skipTo : 1, play);
+						console.log(timeMS);
+						if (startTime) {
+							PlayerInstance?.goto(timeMS > 0 ? timeMS : 1, play);
 						}
 					}}
 				/>
