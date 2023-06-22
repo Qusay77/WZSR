@@ -96,7 +96,7 @@ const DeviceBlock = ({ value }: ValueType) => {
 		<div>
 			{value ? (
 				<>
-					<Icon />
+					{typeof Icon === "function" ? <Icon /> : null}
 					<span>{value}</span>
 				</>
 			) : (
@@ -128,7 +128,7 @@ const BrowserBlock = ({ value }: { value: BrowserType }) => {
 	const Icon = Browsers[USERBROWSER as keyof BrowsersTypes];
 	return (
 		<div>
-			{USERBROWSER ? <Icon /> : null}
+			{typeof Icon === "function" && USERBROWSER ? <Icon /> : null}
 			{USERBROWSER && USERBROWSERVERSION ? (
 				<span>
 					{USERBROWSER ?? <MissingText>Browser Unknown</MissingText>}{" "}
