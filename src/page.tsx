@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import SessionRecording from "./lib";
-import "https://sr.webeyez.dev/module/srIIFE.js";
+import "https://dev.sr.webeyez.dev/module/srIIFE.js";
 // import "../module/srIIFE";
 const rootElement = document.getElementById("root");
 if (rootElement) {
