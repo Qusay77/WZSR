@@ -8,14 +8,13 @@ if (rootElement) {
 	const root = ReactDOM.createRoot(rootElement);
 	root.render(
 		<StrictMode>
-			{/* {import.meta.env.VITE_APP_ENV === "production" ? (
+			{import.meta.env.VITE_APP_ENV === "production" ? (
 				<wz-sr
 				// sessionId={15781901128595206000}
 				></wz-sr>
 			) : (
 				<SessionRecording />
-			)} */}
-			<SessionRecording />
+			)}
 		</StrictMode>,
 	);
 }
