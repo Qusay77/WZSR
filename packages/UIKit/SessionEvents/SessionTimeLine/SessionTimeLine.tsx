@@ -22,7 +22,6 @@ const SessionTimeLine = () => {
 		"http_request",
 		"page_url",
 	];
-
 	const filteredEvents = events
 		.map((f) => {
 			const FilteredEvent = cloneDeep(f);
@@ -31,20 +30,22 @@ const SessionTimeLine = () => {
 			const { data } = expandPageView;
 			const viewNames = data.filter((obj: GroupType) => {
 				const FilteredData = cloneDeep(obj);
+
 				if (FilteredData.custom_data) {
 					const parsed = JSON.parse(FilteredData.custom_data as string);
+
 					FilteredData.custom_data = parsed
 						.map((p: { [key: string]: string }) => Object.values(p))
-						.flat()
-						.join("®");
+						?.flat()
+						?.join("®");
 				}
 				const matches = Object.keys(FilteredData).some((key) => {
 					return (
 						SearchCriteria.includes(key) &&
 						FilteredData[key]
 							?.toString()
-							.toLowerCase()
-							.includes(searchValue.toLocaleLowerCase())
+							?.toLowerCase()
+							?.includes(searchValue.toLocaleLowerCase())
 					);
 				});
 				return matches;
@@ -53,8 +54,8 @@ const SessionTimeLine = () => {
 			FilteredEvent.expandPageView.data = viewNames;
 
 			const SurfaceNameIncluded = name
-				.toLocaleLowerCase()
-				.includes(searchValue.toLocaleLowerCase());
+				?.toLocaleLowerCase()
+				?.includes(searchValue.toLocaleLowerCase());
 			return SurfaceNameIncluded || viewNames.length ? FilteredEvent : null;
 		})
 		.filter((f) => f);
