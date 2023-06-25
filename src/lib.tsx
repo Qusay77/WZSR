@@ -31,8 +31,8 @@ const SessionRecording = ({
 }: {
 	container?: { attributes: NamedNodeMap };
 	sessionId?: string;
-	orgId: string;
-	sessionDate: string;
+	orgId?: string;
+	sessionDate?: string;
 }) => {
 	const urlParams = new URLSearchParams(window.location.search);
 	const entries = urlParams.entries();
