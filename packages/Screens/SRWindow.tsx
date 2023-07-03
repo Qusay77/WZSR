@@ -50,6 +50,7 @@ const SRWindow = ({ sessionInfo }: { sessionInfo: ParamsType }) => {
 	useFetchSessionDetailsQuery(sessionInfo);
 
 	const [fetchReplayFile, { isError }] = useLazyFetchReplayFileQuery();
+
 	useEffect(() => {
 		if (replayUrl) {
 			fetchReplayFile(replayUrl);

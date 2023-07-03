@@ -31,7 +31,7 @@ interface EventsDetails {
 		expandPageView: { entryTime: string; data: Array<GroupType> };
 	}>;
 	details: DetailsSFType | null;
-	replayUrl: string | null;
+	replayUrl: string[] | null;
 	errorsOnly: boolean;
 	searchValue: string;
 	attachedError?: string | null;

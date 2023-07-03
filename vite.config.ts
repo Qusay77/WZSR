@@ -5,6 +5,7 @@ import svgr from "vite-plugin-svgr";
 import { resolve } from "path";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import viteCompression from "vite-plugin-compression";
+import removeConsole from "vite-plugin-remove-console";
 export default defineConfig(({ mode }) => {
 	if (mode === "lib") {
 		return {
@@ -43,6 +44,12 @@ export default defineConfig(({ mode }) => {
 	}
 
 	return {
-		plugins: [react(), tsconfigPaths(), svgr(), viteCompression()],
+		plugins: [
+			react(),
+			tsconfigPaths(),
+			svgr(),
+			viteCompression(),
+			removeConsole(),
+		],
 	};
 });

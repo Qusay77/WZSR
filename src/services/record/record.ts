@@ -1,6 +1,7 @@
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 	const reader = stream?.getReader();
+
 	let res = "";
 	let json: Array<{ [key: string]: string }> = [];
 	const decoder = new TextDecoder("utf-8");
@@ -8,9 +9,8 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 		const { done, value } = (await reader.read()) || {};
 
 		if (done) {
-			json = JSON.parse(res.replace(/\]\[/g, ","));
-			// eslint-disable-next-line no-console
-			console.log(json);
+			json = JSON.parse(`[${res.replace(/\n/g, ",")}]`);
+
 			break;
 		}
 
@@ -20,21 +20,20 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 		}
 	}
 
-	return json;
+	return json.reduce((a: any, c: any) => [...a, ...c.data], []);
 };
-
-const customBaseQuery: BaseQueryFn = async (args) => {
+const customBaseQuery: BaseQueryFn = async (args: Array<string>) => {
 	try {
-		const response = await fetch(args);
+		const responseArr = await Promise.all(
+			args.map(async (arg) => {
+				const response = await fetch(arg);
+				const str = await processStream(response.body);
+				return str;
+			}),
+		);
 
-		if (!response.ok) {
-			throw new Error(`Request failed with status ${response.status}`);
-		}
-		const str = await processStream(response.body);
 		return {
-			data: str,
-			status: response.status,
-			headers: response.headers,
+			data: responseArr.reduce((a, c) => [...a, ...c], []),
 		};
 	} catch (error) {
 		return {

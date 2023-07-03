@@ -41,7 +41,7 @@
 		"lodash": "^4.17.21",
 		"moment": "^2.29.4",
 		"moment-timezone": "^0.5.43",
-		"npm": "^9.6.2",
+		"npm": "^9.7.2",
 		"pako": "^2.1.0",
 		"react": "^18.2.0",
 		"react-circle-flags": "^0.0.18",
@@ -61,6 +61,7 @@
 		"typescript": "^4.9.4",
 		"use-deep-compare-effect": "^1.8.1",
 		"vite-plugin-css-injected-by-js": "^3.1.1",
+		"vite-plugin-remove-console": "^2.1.1",
 		"vite-plugin-svgr": "^2.4.0",
 		"vite-tsconfig-paths": "^4.0.7"
 	},
