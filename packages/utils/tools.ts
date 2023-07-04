@@ -55,8 +55,8 @@ const mobileShare = () => {
 				text: "SR",
 				url: location.href,
 			})
-			.then(() => console.log("Successful share"))
-			.catch((error) => console.log("Error sharing:", error));
+			.then(() => console.warn("Successful share"))
+			.catch((error) => console.warn("Error sharing:", error));
 	}
 };
 const isMacSafariOrChrome = () => {
