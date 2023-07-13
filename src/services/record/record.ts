@@ -20,7 +20,7 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 		}
 	}
 
-	return json.reduce((a: any, c: any) => [...a, ...c.data], []);
+	return json.reduce((a: any, c: any) => [...a, ...JSON.parse(c.data)], []);
 };
 const customBaseQuery: BaseQueryFn = async (args: Array<string>) => {
 	try {
