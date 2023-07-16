@@ -10,7 +10,6 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 
 		if (done) {
 			json = JSON.parse(`[${res.replace(/\n/g, ",")}]`);
-
 			break;
 		}
 
@@ -19,16 +18,24 @@ const processStream = async (stream: ReadableStream<Uint8Array> | null) => {
 			res += chunk;
 		}
 	}
-
-	return json.reduce((a: any, c: any) => [...a, ...JSON.parse(c.data)], []);
+	return json.reduce(
+		(a: any, c: any) => [...a, ...(c.data ? JSON.parse(c.data) : [])],
+		[],
+	);
 };
 const customBaseQuery: BaseQueryFn = async (args: Array<string>) => {
 	try {
 		const responseArr = await Promise.all(
 			args.map(async (arg) => {
-				const response = await fetch(arg);
-				const str = await processStream(response.body);
-				return str;
+				try {
+					const response = await fetch(arg);
+					const str = await processStream(response.body);
+					return str;
+				} catch (error) {
+					// eslint-disable-next-line no-console
+					console.error(`Error processing arg: ${arg}`, error);
+					return null; // or any other value to indicate an error
+				}
 			}),
 		);
 
