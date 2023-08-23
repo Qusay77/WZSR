@@ -48,7 +48,7 @@ const EssentialInfoBlockRow = styled.div`
 	padding: 0px;
 	gap: ${({ theme }) => theme.helpers.clamp(12, 16, 1000, 1920)};
 	width: 100%;
-	height: 42px;
+	height: fit-content;
 	div:not(:last-child) {
 		border-right: 1px solid var(--Seperation);
 		p {
@@ -124,7 +124,7 @@ const MiniList = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 16px;
+	padding: 16px 6px;
 	gap: ${({ theme }) => theme.helpers.clamp(8, 16, 1000, 1920)};
 	isolation: isolate;
 	width: 100%;
@@ -134,10 +134,12 @@ const MiniList = styled.div`
 	overflow-y: auto;
 	font-size: 14px;
 `;
-const MiniListItem = styled.div`
-	border-bottom: 1px solid var(--Seperation);
+const MiniListItem = styled.div<{ hasBorder: boolean }>`
+	border-bottom: ${({ hasBorder }) =>
+		hasBorder ? "1px solid var(--Seperation)" : "unset"};
 	display: inline-flex;
 	gap: 5px;
+	padding: 10px 0;
 	p {
 		font-family: "Inter";
 		font-style: normal;
@@ -178,10 +180,10 @@ const TimeLineBlockExpanded = ({
 	custom_data?: Array<{ definitionName: string; value: string }> | null;
 	pageUrl?: string;
 }) => {
-	const durationStr = duration ? duration?.split(".")[0] : null;
+	const durationStr = duration ?? null;
 	let CustomData = custom_data;
 	if (typeof custom_data === "string") {
-		CustomData = JSON.parse(custom_data);
+		CustomData = custom_data;
 	}
 	const hasStatus = type === "goal" || type === "failed_call";
 	const hasHttpCall = type === "failed_call";
@@ -247,7 +249,10 @@ const TimeLineBlockExpanded = ({
 					<p>Custom Data</p>
 					<MiniList>
 						{CustomData.map(({ definitionName, value }, i) => (
-							<MiniListItem key={`${i}-mini-list`}>
+							<MiniListItem
+								hasBorder={i + 1 !== CustomData?.length}
+								key={`${i}-mini-list`}
+							>
 								<p>{definitionName}:</p>
 								<p>{value}</p>
 							</MiniListItem>

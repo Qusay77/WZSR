@@ -129,7 +129,6 @@ const TimeLineBlockInline = ({
 	expanded,
 	setExpand,
 	name,
-	duration,
 	isError,
 	type,
 	hasErrors,
@@ -138,7 +137,6 @@ const TimeLineBlockInline = ({
 	expanded: boolean;
 	setExpand: Dispatch<SetStateAction<boolean>>;
 	name?: string;
-	duration?: string;
 	isError?: boolean;
 	type?: string;
 	startTime?: number;
@@ -149,7 +147,7 @@ const TimeLineBlockInline = ({
 	};
 	// ?
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const durationStr = duration ? duration?.split(".")[0] : null;
+	// const durationStr = duration ? duration?.split(".")[0] : null;
 	const formattedTime = startTime
 		? moment.utc(startTime > 0 ? startTime : 1).format("mm:ss")
 		: "-:--";

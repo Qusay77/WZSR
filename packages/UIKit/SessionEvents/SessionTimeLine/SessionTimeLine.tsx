@@ -32,8 +32,7 @@ const SessionTimeLine = () => {
 				const FilteredData = cloneDeep(obj);
 
 				if (FilteredData.custom_data) {
-					const parsed = JSON.parse(FilteredData.custom_data as string);
-
+					const parsed = FilteredData.custom_data;
 					FilteredData.custom_data = parsed
 						.map((p: { [key: string]: string }) => Object.values(p))
 						?.flat()

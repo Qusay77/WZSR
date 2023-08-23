@@ -48,7 +48,6 @@ const GroupItem = ({
 		<TimeLineBlockContainer>
 			<TimeLineBlockInline
 				name={name}
-				duration={duration}
 				startTime={entryMS - startMS}
 				setExpand={setExpand}
 				expanded={expanded}
@@ -124,7 +123,7 @@ const TimeLineBlock = ({
 	expandOnSearch: boolean;
 }) => {
 	const [expanded, setExpand] = useState(false);
-	const { name, duration, expandPageView } = event;
+	const { name, expandPageView } = event;
 	const { data, entryTime } = expandPageView;
 	const hasErrors = data.filter((e) => e.isError).map((e) => e.type);
 	const { errorsOnly, details } = useSelector(
@@ -144,7 +143,6 @@ const TimeLineBlock = ({
 		<TimeLineBlockContainer>
 			<TimeLineBlockInline
 				name={name}
-				duration={duration}
 				startTime={entryMS - startMS}
 				setExpand={setExpand}
 				expanded={expanded}
