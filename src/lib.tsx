@@ -27,12 +27,12 @@ const SessionRecording = ({
 	container,
 	sessionId,
 	orgId,
-	sessionDate,
-}: {
+}: // sessionDate,
+{
 	container?: { attributes: NamedNodeMap };
 	sessionId?: string;
 	orgId?: string;
-	sessionDate?: string;
+	// sessionDate?: string;
 }) => {
 	const urlParams = new URLSearchParams(window.location.search);
 	const entries = urlParams.entries();
@@ -41,16 +41,16 @@ const SessionRecording = ({
 	const {
 		orgId: orgIdParam,
 		sessionId: sessionIdParam,
-		sessionDate: sessionDateParam,
+		// sessionDate: sessionDateParam,
 	} = queryParams;
 	const sessionIdProps =
 		sessionId ?? container?.attributes?.getNamedItem("sessionId")?.value;
 	const orgIdProps =
 		orgId ?? container?.attributes?.getNamedItem("orgId")?.value;
-	const sessionDateProps =
-		sessionDate ?? container?.attributes?.getNamedItem("sessionDate")?.value;
-	console.log(orgIdParam, sessionIdParam, sessionDateParam, "params");
-	console.log(orgIdProps, sessionIdProps, sessionDateProps, "props");
+	// const sessionDateProps =
+	// 	sessionDate ?? container?.attributes?.getNamedItem("sessionDate")?.value;
+	console.log(orgIdParam, sessionIdParam, "params");
+	console.log(orgIdProps, sessionIdProps, "props");
 
 	return (
 		<Provider store={store}>
@@ -81,7 +81,7 @@ const SessionRecording = ({
 						sessionInfo={{
 							orgId: orgIdParam ?? orgIdProps,
 							sessionId: sessionIdParam ?? sessionIdProps,
-							sessionDate: sessionDateParam ?? sessionDateProps,
+							// sessionDate: sessionDateParam ?? sessionDateProps,
 						}}
 					/>
 				</ErrorBoundary>

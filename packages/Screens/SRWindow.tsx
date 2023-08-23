@@ -13,7 +13,7 @@ import { useLazyFetchReplayFileQuery } from "src/services/record/record";
 type ParamsType = {
 	sessionId?: string;
 	orgId?: string;
-	sessionDate?: string;
+	// sessionDate?: string;
 };
 const SRWindow = ({ sessionInfo }: { sessionInfo: ParamsType }) => {
 	const handle = useFullScreenHandle();
@@ -27,8 +27,8 @@ const SRWindow = ({ sessionInfo }: { sessionInfo: ParamsType }) => {
 	const { data } = useSelector(
 		({ PlayerState }: { PlayerState: PlayerStateTypes }) => PlayerState,
 	);
-	const { sessionId, orgId, sessionDate } = sessionInfo;
-	if (!sessionId || !orgId || !sessionDate) {
+	const { sessionId, orgId } = sessionInfo;
+	if (!sessionId || !orgId) {
 		return (
 			<div
 				style={{
